@@ -12,7 +12,7 @@ export default function ConnectWallet() {
   const [isOpen, toggle] = useState(false);
   const [getWalletOpen, setGetWalletOpen] = useState(false);
   const { isRightNetwork } = useNetworkStatus();
-  const chainId = process.env.REACT_APP_NET_ID;
+  const chainId = process.env.REACT_APP_CHAIN_ID;
   const { authenticate, isAuthenticated, isAuthenticating, user, logout, isWeb3Enabled, isInitialized } = useMoralis();
   const login = async (options) => {
     try {
