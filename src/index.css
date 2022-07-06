@@ -1,13 +1,109 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  .padding {
+    @apply px-8 lg:px-32;
+  }
+
+  .btn {
+    @apply bg-myblue text duration-200 hover:bg-myblue2 z-50 px-6 py-1 hover:-translate-y-1  rounded-3xl;
+  }
+  .btn2 {
+    @apply bg-myblue text duration-200 hover:bg-myblue2 z-50 px-8 py-1  rounded-3xl
+    hover:-translate-y-1;
+  }
+  .btn2-border {
+    @apply border-2 bg-transparent border-myblue text duration-200 hover:-translate-y-1 hover:bg-myblue  z-50 px-8 py-1  rounded-3xl;
+  }
+
+  .hero {
+    @apply mt-10 lg:mx-auto w-auto lg:w-[700px];
+  }
+
+  .btn-set-1 {
+    @apply mx-auto w-60;
+  }
+
+  .btn-set-2 {
+    @apply mx-auto w-80;
+  }
+
+  .text {
+    @apply text-sm  md:text-lg;
+  }
+
+  .header {
+    @apply text-2xl lg:text-6xl;
+  }
+
+  .margin {
+    @apply mt-6;
+  }
+
+  .margin2 {
+    @apply mt-10;
+  }
+
+  .socials {
+    @apply flex justify-between w-[140px] lg:w-[300px] mt-2 lg:mt-5;
+  }
+
+  .ido {
+    @apply flex margin  mt-16 justify-center z-50;
+  }
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@font-face {
+  font-family: "Monument Extended";
+  src: url("/src//font/MonumentExtended-Regular.otf");
+}
+
+.glass {
+  background: linear-gradient(
+    121.29deg,
+    rgba(43, 43, 43, 0.81) 0%,
+    rgba(61, 61, 61, 0.2) 102.71%
+  );
+  border: 1.10506px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(8.84047px);
+}
+
+.my-border {
+  border-bottom: 0.762995px solid #ffffff;
+}
+
+.my-border:hover {
+  border-color: #8b898e;
+}
+.footer-bg {
+  background: linear-gradient(
+    271.03deg,
+    #171c23 0.99%,
+    rgba(23, 28, 35, 0.14) 109.84%
+  );
+}
+
+.glow {
+  will-change: box-shadow, background-color;
+  animation: glowing 3s infinite;
+  animation-delay: 1000ms;
+}
+
+@keyframes glowing {
+  0% {
+    background-color: #0e70aa;
+    box-shadow: 0 0 3px #0e70aa;
+  }
+  20% {
+    background-color: #51b6f1;
+    box-shadow: 0 0 10px #51b6f1;
+  }
+  100% {
+    background-color: #0e70aa;
+    box-shadow: 0 0 3px #0e70aa;
+  }
 }
