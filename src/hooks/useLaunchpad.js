@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useMoralis } from "react-moralis";
 import IBEP20 from "../abis/IBEP20.json";
 import useDataFromContractFunction from "./useDataFromContractFunction";
-import { ethers, toEther } from "../utils/web3";
+import { ethers, isSuccessfulTransaction, toEther } from "../utils/web3";
 
 const busdAddress = process.env.REACT_APP_BUSD_ADDRESS || null;
 
@@ -82,9 +82,12 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     }
     const etherAmount = ethers.utils.parseEther(amount.toString());
     try {
-      await paymentMethod.connect(web3.getSigner()).approve(launchpad.address, etherAmount);
-      const transaction = await launchpad.connect(web3.getSigner()).buyLaunchpadSale(sale, etherAmount);
-      return transaction;
+      const approveTrx = await paymentMethod.connect(web3.getSigner()).approve(launchpad.address, etherAmount);
+      const isSuccessful = await isSuccessfulTransaction(approveTrx);
+      if (isSuccessful) {
+        const transaction = await launchpad.connect(web3.getSigner()).buyLaunchpadSale(sale, etherAmount);
+        return transaction;
+      }
     } catch (e) {
       const verbose = e.data?.message;
       if (verbose) {

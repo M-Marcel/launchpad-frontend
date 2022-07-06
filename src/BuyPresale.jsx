@@ -19,7 +19,7 @@ export default function BuyPresale({ buyPresale, reloadVesting, reloadLaunchpad 
           icon: "success",
           confirmButtonText: "Cool",
         });
-        setPresaleAmount(null);
+        setPresaleAmount("");
         setBuying(false);
         await reloadLaunchpad();
         await reloadVesting();
