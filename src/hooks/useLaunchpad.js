@@ -46,7 +46,6 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   async function loadUserVestingSchedules() {
     const schedules = await launchpad.getUserVestingScheduleBySale(sale, userAddress);
     setUserVestingSchedule(schedules);
-    console.log("overloading");
   }
 
   useEffect(() => {

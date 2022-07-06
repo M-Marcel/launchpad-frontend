@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 function App() {
   const connectorId = window.localStorage.getItem("connectorId");
-  const chainId = process.env.REACT_APP_NET_ID;
+  const chainId = process.env.REACT_APP_CHAIN_ID;
   const { isWeb3Enabled, isAuthenticated, isWeb3EnableLoading, isInitialized, enableWeb3 } = useMoralis();
   useEffect(() => {
     async function bootWeb3() {
