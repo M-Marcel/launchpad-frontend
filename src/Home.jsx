@@ -16,29 +16,9 @@ import {
 
 function Home() {
   return (
-    <div className='relative overflow-hidden  max-h-fit bg-dark text-white  font-dmsans'>
-      <img src={color1} alt='bg-color' className='absolute   top-0 left-0' />
-      <img src={color2} alt='bg-color' className='absolute   top-0 right-0' />
-      <img
-        src={coinRight}
-        alt='bg-color'
-        className='absolute hidden md:block md:w-auto md:h-auto z-0  top-[10%] right-0'
-      />
-      <img
-        src={coinLeft}
-        alt='bg-color'
-        className='absolute hidden md:block md:w-auto md:h-auto   top-[55%] z-0  left-0'
-      />
 
-      <nav className='padding pt-8 lg:pt-20 justify-between items-center flex'>
-        <div className='logo z-50 flex'>
-          <img src={logo} alt='bg-color' />
-          <h2 className='font-monument font-bold hidden md:block text-2xl ml-3'>
-            Cloudax
-          </h2>
-        </div>
-        <button className='   btn'>Connect</button>
-      </nav>
+
+   <div>
 
       <div className='hero'>
         <div className='flex btn-set-1 justify-between'>
@@ -203,24 +183,6 @@ function Home() {
         </div>
       </section>
 
-      <footer className=' footer-bg relative z-50 mt-20 lg:mt-32 xl:mt-80 padding w-full flex items-center justify-between  h-[100px]'>
-        <div className='flex justify-between'>
-          <p className=' text-[8px] lg:text-base'>
-            Cloudr (c) 2022. All Rights Reserved.
-          </p>
-        </div>
-        <div className='flex w-[80px] lg:w-[150px] justify-between'>
-          <a href='https://' className='duration-200 hover:scale-150'>
-            <img className='h-4 w-4' src={twitterFooter} alt='Twitter' />
-          </a>
-          <a href='https://' className='duration-200 hover:scale-150'>
-            <img className='h-4 w-4' src={telegramFooter} alt='Twitter' />
-          </a>
-          <a href='https://' className='duration-200 hover:scale-150'>
-            <img className='h-4 w-4' src={mediumFooter} alt='Twitter' />
-          </a>
-        </div>
-      </footer>
     </div>
   );
 }
