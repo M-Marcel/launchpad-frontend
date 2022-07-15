@@ -33,7 +33,7 @@
   }
 
   .text {
-    @apply text-sm  md:text-lg;
+    @apply text-sm md:text-lg;
   }
 
   .header {
@@ -53,7 +53,34 @@
   }
 
   .ido {
-    @apply flex margin  mt-16 justify-center z-50;
+    @apply z-50 flex justify-center mt-16 margin;
+  }
+  .StakeCloudax__hero {
+    @apply mt-10 lg:mt-[73px];
+  }
+  .StakeCloudax__hero__one-liner {
+    @apply text-2xl md:text-3xl text-left md:text-center max-w-[600px] mx-auto lg:text-[45.92px] lg:leading-[55.1px] font-monument font-extrabold mb-[21.2px];
+  }
+  .StakeCloudax__hero__explainer {
+    @apply text-base lg:text-[22.4px] lg:leading-[29.16px] max-w-[639.42px] mx-auto text-left md:text-center font-dmsans mb-[40px] lg:mb-[61.15px];
+  }
+  .StakeCloudax__hero_ctas {
+    @apply flex items-center justify-start md:justify-center;
+  }
+  .StakeCloudax__hero_ctas .btn:last-child {
+    @apply ml-[26.55px];
+  }
+  .StakeCloudax__stat-cards {
+    @apply flex justify-center gap-5 text-white mt-14 md:mt-[83.66px];
+  }
+  .StakeCloudax__stat-card {
+    @apply p-5 lg:p-[35px] rounded-[8.28px];
+  }
+  .StakeCloudax__stat-cards__title {
+    @apply text-xs font-medium lg:text-sm font-dmsans mb-[8.11px];
+  }
+  .StakeCloudax__stat-cards__value {
+    @apply text-xl lg:text-[28.29px] lg:leading-[33.95px] font-monument;
   }
 }
 
@@ -63,7 +90,11 @@
 }
 
 .glass {
-  background: linear-gradient(121.29deg, rgba(43, 43, 43, 0.81) 0%, rgba(61, 61, 61, 0.2) 102.71%);
+  background: linear-gradient(
+    121.29deg,
+    rgba(43, 43, 43, 0.81) 0%,
+    rgba(61, 61, 61, 0.2) 102.71%
+  );
   border: 1.10506px solid rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(8.84047px);
 }
@@ -76,7 +107,11 @@
   border-color: #8b898e;
 }
 .footer-bg {
-  background: linear-gradient(271.03deg, #171c23 0.99%, rgba(23, 28, 35, 0.14) 109.84%);
+  background: linear-gradient(
+    271.03deg,
+    #171c23 0.99%,
+    rgba(23, 28, 35, 0.14) 109.84%
+  );
 }
 
 .glow {

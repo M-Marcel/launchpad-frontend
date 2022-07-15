@@ -32,15 +32,17 @@ export default function LaunchpadSale({ sale }) {
     if (launchpadSale) {
       const sold = toEther(launchpadSale.sold);
       const cap = toEther(launchpadSale.saleCap);
-      setSoldPercent(Number((parseFloat(sold) / parseFloat(cap)) * 100).toFixed(2));
+      setSoldPercent(
+        Number((parseFloat(sold) / parseFloat(cap)) * 100).toFixed(2)
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [launchpadSale]);
   return (
     <section>
       {launchpadSale ? (
-        <section className="padding margin2 z-50">
-          <div className="lg:flex justify-between">
+        <section className="z-50 padding margin2">
+          <div className="justify-between lg:flex">
             <div className="glass w-auto lg:w-[49%] rounded-2xl p-6">
               <p className="text">Progress</p>
               <div className="w-full relative h-[20px] rounded-full mt-4 bg-white">
@@ -49,7 +51,7 @@ export default function LaunchpadSale({ sale }) {
                   className={`absolute -top-2 h-[20px] rounded-full mt-2 bg-myblue`}
                 ></div>
               </div>
-              <div className="flex mt-4 justify-between">
+              <div className="flex justify-between mt-4">
                 <p className="text">{soldPercent}%</p>
                 <p className="text">
                   {inThousands(toEther(launchpadSale?.sold || "0"))}/
