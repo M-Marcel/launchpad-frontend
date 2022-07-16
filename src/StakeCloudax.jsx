@@ -3,15 +3,15 @@ import ConnectWallet from "./auth/ConnectWallet";
 import CheckpointsCard from "./components/CheckpointsCard";
 import Stake from "./components/Stake";
 import Unstake from "./components/Unstake";
+import useCheckpointsState from "./hooks/useCheckpointsState";
 
 function StakeCloudax() {
-  const [checkpoints, setCheckpoints] = React.useState({
-    "Connect Wallet": false,
-    "Have $CLDX": false,
-    "Enter Amount": false,
-    "Have $BNB": false,
-  });
+  const { checkpoints, updateCheckpoint } = useCheckpointsState();
   const [appOption, setAppOption] = React.useState("stake");
+  React.useEffect(() => {
+    updateCheckpoint("Enter Amount", false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [appOption]);
   return (
     <section className="relative">
       <section className="StakeCloudax__hero">
@@ -51,9 +51,7 @@ function StakeCloudax() {
         </section>
       </section>
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-[21px] wrapper">
-        <div
-          className="self-start glass StakeCloudax__card "
-        >
+        <div className="self-start glass StakeCloudax__card ">
           <div className="bg-[#04080F] rounded-[5.92px] max-w-[196px] p-[9px] mb-[29.17px]">
             <button
               onClick={() => setAppOption("stake")}
@@ -76,7 +74,9 @@ function StakeCloudax() {
               Unstake
             </button>
           </div>
-          {appOption === "stake" && <Stake />}
+          {appOption === "stake" && (
+            <Stake updateCheckpoint={updateCheckpoint} />
+          )}
           {appOption === "unstake" && <Unstake />}
         </div>
         <CheckpointsCard checkpoints={checkpoints} />
