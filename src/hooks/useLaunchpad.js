@@ -115,7 +115,7 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   const canClaimFromSchedule = async (scheduleId) => {
     const currentBlockTime = await launchpad.getCurrentTime();
     const schedule = userVestingSchedule[scheduleId];
-    return currentBlockTime.gte(schedule.startTime.add(schedule.duration));
+    return currentBlockTime.gte(schedule.startTime.add(schedule.duration)) && schedule.totalAmount.gt(schedule.releasedAmount);
   };
   return {
     launchpad,
