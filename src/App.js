@@ -34,12 +34,12 @@ function App() {
         <img
           src={coinRight}
           alt='bg-color'
-          className='absolute hidden md:block md:w-auto md:h-auto z-0  top-[10%] right-0'
+          className='absolute hidden md:block md:w-auto md:h-auto max-h-[718.04px] z-0 top-[13%] right-[-55px]'
         />
         <img
           src={coinLeft}
           alt='bg-color'
-          className='absolute hidden md:block md:w-auto md:h-auto top-[55%] z-0 left-0'
+          className='absolute hidden md:block md:w-auto md:h-auto max-h-[718.04px] top-[55%] z-0 left-0'
         />
         <Nav />
 

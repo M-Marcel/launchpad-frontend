@@ -18,7 +18,7 @@ function Home() {
             className="z-50 w-16 h-16 lg:w-auto lg:h-32"
             alt="Coin"
           />
-          <div className="z-50 ml-4">
+          <div className="z-50 ml-[48px]">
             <p className="font-bold header">Cloudax Token IDO</p>
             <div className="socials">
               <a href="#eplore" className="duration-200 hover:scale-150">
@@ -53,7 +53,7 @@ function Home() {
           </div>
         </div>
 
-        <p className="relative z-50 px-8 text lg:text-center lg:px-0 margin">
+        <p className="relative z-50 px-8 text lg:text-center max-w-[639.42px] mx-auto lg:px-0 margin">
           $CLDX is the native and utility token designed to power the
           ever-expanding and innovative cloudax ecosystem. Built to last with a
           hyper deflatinary mechanism which include qauterly buybacks/burn and
