@@ -27,6 +27,7 @@ export default function LaunchpadSale({ sale }) {
     loadLaunchpad,
     claimFromVestingSchedule,
     canClaimFromSchedule,
+    launchpad,
   } = useLaunchpad(launchpadOptions);
   useEffect(() => {
     if (launchpadSale) {
@@ -58,11 +59,17 @@ export default function LaunchpadSale({ sale }) {
                   {inThousands(toEther(launchpadSale?.saleCap || "0"))} BUSD
                 </p>
               </div>
-              <BuyPresale
-                buyPresale={buyLaunchpadSale}
-                reloadLaunchpad={loadLaunchpad}
-                reloadVesting={loadUserVestingSchedules}
-              />
+              {!userVestingSchedule?.length > 0 && (
+                <BuyPresale
+                  hasAllocation={launchpadSale?.hasAllocation}
+                  buyPresale={buyLaunchpadSale}
+                  reloadLaunchpad={loadLaunchpad}
+                  launchpad={launchpad}
+                  sale={sale}
+                  userAddress={user?.get("ethAddress")}
+                  reloadVesting={loadUserVestingSchedules}
+                />
+              )}
             </div>
             <div className="glass xl:items-center w-auto lg:w-[49%] mt-6 lg:mt-0 rounded-2xl flex justify-between  p-6">
               <div className="text">
@@ -83,6 +90,7 @@ export default function LaunchpadSale({ sale }) {
           </div>
           {userVestingSchedule && userVestingSchedule.length > 0 && (
             <VestingSchedule
+              loadVesting={loadUserVestingSchedules}
               vestingSchedule={userVestingSchedule}
               claimTokens={claimFromVestingSchedule}
               canClaim={canClaimFromSchedule}

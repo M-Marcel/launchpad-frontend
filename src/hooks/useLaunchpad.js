@@ -56,8 +56,8 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   }, [isInitialized]);
   useEffect(() => {
     if (launchpadData) {
-      const [saleRate, isActive, saleMin, saleMax, saleCap, sold, hasWhitelist] = launchpadData[sale];
-      setLaunchpadSale({ saleRate, isActive, saleMin, saleMax, saleCap, sold, hasWhitelist });
+      const [saleRate, isActive, saleMin, saleMax, saleCap, sold, hasWhitelist, hasAllocation] = launchpadData[sale];
+      setLaunchpadSale({ saleRate, isActive, saleMin, saleMax, saleCap, sold, hasWhitelist, hasAllocation });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [launchpadData]);
@@ -77,6 +77,9 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       throw Error("Please provide a valid amount");
     }
     if (parseFloat(amount) <= 0) {
+      if (launchpadSale.hasAllocation) {
+        throw Error("You do not have any BUSD allocation to buy this sale");
+      }
       throw Error("Please provide a valid amount");
     }
     const etherAmount = ethers.utils.parseEther(amount.toString());
@@ -99,20 +102,14 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       throw e;
     }
   };
-  const claimFromVestingSchedule = async (scheduleId, amount) => {
+  const claimFromVestingSchedule = async (scheduleId) => {
     const schedule = userVestingSchedule[scheduleId];
-    if (amount > parseFloat(toEther(schedule.totalAmount.toString()))) {
-      throw Error("Amount exceeds total amount");
-    }
-    if (amount > toEther(schedule.totalAmount.sub(schedule.releasedAmount))) {
-      throw Error("Amount exceeds remaining amount");
-    }
-    if (!canClaimFromSchedule(scheduleId)) {
+    if (!(await canClaimFromSchedule(scheduleId))) {
       throw Error("Tokens still vested");
     }
     const transaction = await launchpad
       .connect(web3.getSigner())
-      .claimFromVestingSchedule(sale, scheduleId, ethers.utils.parseEther(amount));
+      .release(sale, scheduleId, ethers.utils.parseEther(toEther(schedule.totalAmount.toString())));
     return transaction;
   };
   const canClaimFromSchedule = async (scheduleId) => {
@@ -121,6 +118,7 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     return currentBlockTime.gte(schedule.startTime.add(schedule.duration));
   };
   return {
+    launchpad,
     launchpadSale,
     userVestingSchedule,
     buyLaunchpadSale,

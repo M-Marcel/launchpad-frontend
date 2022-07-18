@@ -1,6 +1,6 @@
 import React from "react";
 import { useMoralis } from "react-moralis";
-import { ethers, isSuccessfulTransaction, toEther } from "../utils/web3";
+import { ethers, isSuccessfulTransaction } from "../utils/web3";
 import useDataFromContractFunction from "./useDataFromContractFunction";
 import IBEP20 from "../abis/IBEP20.json";
 

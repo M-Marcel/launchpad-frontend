@@ -1,17 +1,5 @@
-[
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_privateSaleMin",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_privateSaleMax",
-        "type": "uint256"
-      },
-      {
+[{
+    "inputs": [{
         "internalType": "uint256",
         "name": "_privateSaleRate",
         "type": "uint256"
@@ -57,8 +45,31 @@
   },
   {
     "anonymous": false,
-    "inputs": [
+    "inputs": [{
+        "indexed": false,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "allocation",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "enum CloudrLaunchpad.Presale",
+        "name": "saleId",
+        "type": "uint8"
+      }
+    ],
+    "name": "GaveAllocation",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [{
         "indexed": false,
         "internalType": "address",
         "name": "buyer",
@@ -72,9 +83,9 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "enum CloudrLaunchpad.Presale",
         "name": "saleId",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "name": "LaunchpadSaleBought",
@@ -82,8 +93,7 @@
   },
   {
     "anonymous": false,
-    "inputs": [
-      {
+    "inputs": [{
         "indexed": false,
         "internalType": "uint256",
         "name": "timestamp",
@@ -91,9 +101,9 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "enum CloudrLaunchpad.Presale",
         "name": "saleId",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "name": "LaunchpadSaleStarted",
@@ -101,8 +111,7 @@
   },
   {
     "anonymous": false,
-    "inputs": [
-      {
+    "inputs": [{
         "indexed": false,
         "internalType": "uint256",
         "name": "timestamp",
@@ -110,9 +119,9 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "enum CloudrLaunchpad.Presale",
         "name": "saleId",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "name": "LaunchpadSaleStopped",
@@ -120,8 +129,7 @@
   },
   {
     "anonymous": false,
-    "inputs": [
-      {
+    "inputs": [{
         "indexed": true,
         "internalType": "address",
         "name": "previousOwner",
@@ -139,8 +147,7 @@
   },
   {
     "anonymous": false,
-    "inputs": [
-      {
+    "inputs": [{
         "indexed": false,
         "internalType": "address",
         "name": "beneficiaryAddress",
@@ -154,9 +161,9 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "enum CloudrLaunchpad.Presale",
         "name": "saleId",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "name": "Released",
@@ -164,8 +171,7 @@
   },
   {
     "anonymous": false,
-    "inputs": [
-      {
+    "inputs": [{
         "indexed": false,
         "internalType": "address",
         "name": "to",
@@ -183,8 +189,7 @@
   },
   {
     "anonymous": false,
-    "inputs": [
-      {
+    "inputs": [{
         "indexed": false,
         "internalType": "address",
         "name": "user",
@@ -192,9 +197,9 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "enum CloudrLaunchpad.Presale",
         "name": "saleId",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "name": "WhitelistRemoved",
@@ -202,8 +207,7 @@
   },
   {
     "anonymous": false,
-    "inputs": [
-      {
+    "inputs": [{
         "indexed": false,
         "internalType": "address",
         "name": "user",
@@ -211,9 +215,9 @@
       },
       {
         "indexed": false,
-        "internalType": "uint256",
+        "internalType": "enum CloudrLaunchpad.Presale",
         "name": "saleId",
-        "type": "uint256"
+        "type": "uint8"
       }
     ],
     "name": "Whitelisted",
@@ -222,13 +226,11 @@
   {
     "inputs": [],
     "name": "owner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{
+      "internalType": "address",
+      "name": "",
+      "type": "address"
+    }],
     "stateMutability": "view",
     "type": "function",
     "constant": true
@@ -241,13 +243,33 @@
     "type": "function"
   },
   {
-    "inputs": [
+    "inputs": [{
+        "internalType": "enum CloudrLaunchpad.Presale",
+        "name": "",
+        "type": "uint8"
+      },
       {
         "internalType": "address",
-        "name": "newOwner",
+        "name": "",
         "type": "address"
       }
     ],
+    "name": "saleAllocation",
+    "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [{
+      "internalType": "address",
+      "name": "newOwner",
+      "type": "address"
+    }],
     "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -256,13 +278,11 @@
   {
     "inputs": [],
     "name": "vestedTokens",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+    }],
     "stateMutability": "view",
     "type": "function",
     "constant": true
@@ -270,13 +290,33 @@
   {
     "inputs": [],
     "name": "getToken",
-    "outputs": [
+    "outputs": [{
+      "internalType": "contract IBEP20",
+      "name": "",
+      "type": "address"
+    }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [{
+        "internalType": "enum CloudrLaunchpad.Presale",
+        "name": "sale",
+        "type": "uint8"
+      },
       {
-        "internalType": "contract IBEP20",
-        "name": "",
+        "internalType": "address",
+        "name": "user",
         "type": "address"
       }
     ],
+    "name": "allocatedBuy",
+    "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+    }],
     "stateMutability": "view",
     "type": "function",
     "constant": true
@@ -284,13 +324,11 @@
   {
     "inputs": [],
     "name": "getPaymentMethod",
-    "outputs": [
-      {
-        "internalType": "contract IBEP20",
-        "name": "",
-        "type": "address"
-      }
-    ],
+    "outputs": [{
+      "internalType": "contract IBEP20",
+      "name": "",
+      "type": "address"
+    }],
     "stateMutability": "view",
     "type": "function",
     "constant": true
@@ -298,140 +336,147 @@
   {
     "inputs": [],
     "name": "getSales",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "saleRate",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "saleMin",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "saleMax",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "saleCap",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "sold",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "hasWhitelist",
-            "type": "bool"
-          }
-        ],
-        "internalType": "struct CloudrLaunchpad.LaunchpadSale[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
+    "outputs": [{
+      "components": [{
+          "internalType": "uint256",
+          "name": "saleRate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleMin",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleMax",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleCap",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "sold",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "hasWhitelist",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "hasAllocation",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleAllocated",
+          "type": "uint256"
+        }
+      ],
+      "internalType": "struct CloudrLaunchpad.LaunchpadSale[]",
+      "name": "",
+      "type": "tuple[]"
+    }],
     "stateMutability": "view",
     "type": "function",
     "constant": true
   },
   {
-    "inputs": [
-      {
-        "internalType": "enum CloudrLaunchpad.Presale",
-        "name": "sale",
-        "type": "uint8"
-      }
-    ],
+    "inputs": [{
+      "internalType": "enum CloudrLaunchpad.Presale",
+      "name": "sale",
+      "type": "uint8"
+    }],
     "name": "getLaunchpadSale",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "saleRate",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "isActive",
-            "type": "bool"
-          },
-          {
-            "internalType": "uint256",
-            "name": "saleMin",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "saleMax",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "saleCap",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "sold",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "hasWhitelist",
-            "type": "bool"
-          }
-        ],
-        "internalType": "struct CloudrLaunchpad.LaunchpadSale",
-        "name": "",
-        "type": "tuple"
-      }
-    ],
+    "outputs": [{
+      "components": [{
+          "internalType": "uint256",
+          "name": "saleRate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isActive",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleMin",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleMax",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleCap",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "sold",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "hasWhitelist",
+          "type": "bool"
+        },
+        {
+          "internalType": "bool",
+          "name": "hasAllocation",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleAllocated",
+          "type": "uint256"
+        }
+      ],
+      "internalType": "struct CloudrLaunchpad.LaunchpadSale",
+      "name": "",
+      "type": "tuple"
+    }],
     "stateMutability": "view",
     "type": "function",
     "constant": true
   },
   {
-    "inputs": [
-      {
-        "internalType": "enum CloudrLaunchpad.Presale",
-        "name": "sale",
-        "type": "uint8"
-      }
-    ],
+    "inputs": [{
+      "internalType": "enum CloudrLaunchpad.Presale",
+      "name": "sale",
+      "type": "uint8"
+    }],
     "name": "startLaunchpadSale",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "enum CloudrLaunchpad.Presale",
-        "name": "sale",
-        "type": "uint8"
-      }
-    ],
+    "inputs": [{
+      "internalType": "enum CloudrLaunchpad.Presale",
+      "name": "sale",
+      "type": "uint8"
+    }],
     "name": "stopLaunchpadSale",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [
-      {
+    "inputs": [{
         "internalType": "enum CloudrLaunchpad.Presale",
         "name": "sale",
         "type": "uint8"
@@ -448,8 +493,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
+    "inputs": [{
         "internalType": "enum CloudrLaunchpad.Presale",
         "name": "sale",
         "type": "uint8"
@@ -466,8 +510,7 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
+    "inputs": [{
         "internalType": "enum CloudrLaunchpad.Presale",
         "name": "sale",
         "type": "uint8"
@@ -484,11 +527,10 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
+    "inputs": [{
+        "internalType": "enum CloudrLaunchpad.Presale",
         "name": "sale",
-        "type": "uint256"
+        "type": "uint8"
       },
       {
         "internalType": "address",
@@ -497,45 +539,41 @@
       }
     ],
     "name": "getUserVestingScheduleBySale",
-    "outputs": [
-      {
-        "components": [
-          {
-            "internalType": "uint256",
-            "name": "totalAmount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "startTime",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "duration",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "releasedAmount",
-            "type": "uint256"
-          }
-        ],
-        "internalType": "struct CloudrLaunchpad.VestingSchedule[]",
-        "name": "",
-        "type": "tuple[]"
-      }
-    ],
+    "outputs": [{
+      "components": [{
+          "internalType": "uint256",
+          "name": "totalAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "duration",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "releasedAmount",
+          "type": "uint256"
+        }
+      ],
+      "internalType": "struct CloudrLaunchpad.VestingSchedule[]",
+      "name": "",
+      "type": "tuple[]"
+    }],
     "stateMutability": "view",
     "type": "function",
     "constant": true
   },
   {
-    "inputs": [
-      {
-        "internalType": "uint256",
+    "inputs": [{
+        "internalType": "enum CloudrLaunchpad.Presale",
         "name": "sale",
-        "type": "uint256"
+        "type": "uint8"
       },
       {
         "internalType": "uint256",
@@ -549,24 +587,75 @@
       }
     ],
     "name": "release",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
+    "outputs": [{
+      "internalType": "bool",
+      "name": "",
+      "type": "bool"
+    }],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
-    "inputs": [
-      {
+    "inputs": [{
+      "internalType": "enum CloudrLaunchpad.Presale",
+      "name": "sale",
+      "type": "uint8"
+    }],
+    "name": "enableAllocation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{
+      "internalType": "enum CloudrLaunchpad.Presale",
+      "name": "sale",
+      "type": "uint8"
+    }],
+    "name": "disableAllocation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{
+      "internalType": "enum CloudrLaunchpad.Presale",
+      "name": "sale",
+      "type": "uint8"
+    }],
+    "name": "disableWhitelist",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{
         "internalType": "address",
-        "name": "wallet",
+        "name": "user",
         "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "allocation",
+        "type": "uint256"
+      },
+      {
+        "internalType": "enum CloudrLaunchpad.Presale",
+        "name": "sale",
+        "type": "uint8"
       }
     ],
+    "name": "addAllocation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{
+      "internalType": "address",
+      "name": "wallet",
+      "type": "address"
+    }],
     "name": "withdrawResidualBalance",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -575,13 +664,11 @@
   {
     "inputs": [],
     "name": "getCurrentTime",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
+    "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+    }],
     "stateMutability": "view",
     "type": "function",
     "constant": true

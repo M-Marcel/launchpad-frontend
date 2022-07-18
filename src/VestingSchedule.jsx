@@ -1,22 +1,21 @@
 import { toEther } from "./utils/web3";
 import moment from "moment";
 import { inThousands } from "./utils/modifiers";
+import ClaimFromVesting from "./components/ClaimFromVesting";
 
-export default function VestingSchedule({ vestingSchedule, claimTokens, canClaim }) {
+export default function VestingSchedule({
+  vestingSchedule,
+  claimTokens,
+  canClaim,
+  loadVesting,
+}) {
   const totalVested = vestingSchedule
     .map((sch) => toEther(sch.totalAmount))
     .reduce((a, b) => parseFloat(a) + parseFloat(b));
-  const claimTokensFromVesting = async (scheduleId) => {
-    alert("claiming");
-    try {
-      await claimTokens(scheduleId);
-    } catch (e) {
-      alert("Error: " + e.message);
-    }
-  };
+
   return (
-    <div className="glass margin overflow-auto flex justify-between rounded-2xl p-12">
-      <table className=" z-50 text w-full">
+    <div className="flex justify-between p-12 overflow-auto glass margin rounded-2xl">
+      <table className="z-50 w-full text">
         <thead>
           <tr>
             <th className="py-3">Allocation</th>
@@ -28,23 +27,34 @@ export default function VestingSchedule({ vestingSchedule, claimTokens, canClaim
         </thead>
         <tbody className="text-center">
           {vestingSchedule.map((sch, index) => {
-            const percentage = (parseFloat(toEther(sch.totalAmount)) / totalVested) * 100;
+            const percentage =
+              (parseFloat(toEther(sch.totalAmount)) / totalVested) * 100;
             return (
-              <tr key={index} className=" xl:hover:scale-105 duration-300 my-border">
-                <td className="py-6 px-6">{inThousands(toEther(sch.totalAmount))}</td>
-                <td className="py-6 px-6">{percentage}%</td>
-                <td className="py-6 px-6">
-                  {moment.unix(parseInt(sch.startTime, 10) + parseInt(sch.duration, 10)).format("YYYY-MM-DD HH:mm")}
+              <tr
+                key={index}
+                className="duration-300 xl:hover:scale-105 my-border"
+              >
+                <td className="px-6 py-6">
+                  {inThousands(toEther(sch.totalAmount))}
                 </td>
-                <td className="py-6 px-6">{inThousands(toEther(sch.releasedAmount))}</td>
-                <td className="py-6 px-6">
-                  <button
-                    disabled={true}
-                    onClick={async () => await claimTokensFromVesting(index)}
-                    className="text-black btn2"
-                  >
-                    Claim
-                  </button>
+                <td className="px-6 py-6">{percentage}%</td>
+                <td className="px-6 py-6">
+                  {moment
+                    .unix(
+                      parseInt(sch.startTime, 10) + parseInt(sch.duration, 10)
+                    )
+                    .format("YYYY-MM-DD HH:mm")}
+                </td>
+                <td className="px-6 py-6">
+                  {inThousands(toEther(sch.releasedAmount))}
+                </td>
+                <td className="px-6 py-6">
+                  <ClaimFromVesting
+                    canClaim={canClaim}
+                    claimTokens={claimTokens}
+                    scheduleId={index}
+                    reloadVesting={loadVesting}
+                  />
                 </td>
               </tr>
             );
