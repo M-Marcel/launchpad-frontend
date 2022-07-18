@@ -54,9 +54,11 @@ function Home() {
         </div>
 
         <p className="relative z-50 px-8 text lg:text-center lg:px-0 margin">
-          Lorem ipsum dolor sit amet, consectetur Lorem ipsum dolor sit amet,
-          consectetur adipiscing elit. Sit sapien ultricies est sapien sed
-          maecenas amet sem id. In hendrerit auctor urna pellentesque sed.
+          $CLDX is the native and utility token designed to power the
+          ever-expanding and innovative cloudax ecosystem. Built to last with a
+          hyper deflatinary mechanism which include qauterly buybacks/burn and
+          8% early sell tax which is also partly allocated for token burning.
+          more info? see litepaper.
         </p>
         <div className="flex justify-between btn-set-2 margin2">
           <ConnectWallet />
