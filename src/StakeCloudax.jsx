@@ -15,6 +15,7 @@ function StakeCloudax() {
   const { checkpoints, updateCheckpoint } = useCheckpointsState();
   const [appOption, setAppOption] = React.useState("stake");
   const cloudaxBalance = useGetCloudaxBalance();
+  const cloudrUsd = 1.5;
   const { user } = useMoralis();
   const stakingOptions = {
     ABI: STAKING_ABI,
@@ -75,7 +76,16 @@ function StakeCloudax() {
             <h3 className="StakeCloudax__stat-cards__title">
               Total Value Locked
             </h3>
-            <h3 className="StakeCloudax__stat-cards__value">$12,343,365</h3>
+            <h3 className="StakeCloudax__stat-cards__value">
+              $
+              {stakingInfo
+                ? inThousands(
+                    (
+                      parseFloat(toEther(stakingInfo.totalStaked)) * cloudrUsd
+                    ).toFixed(2)
+                  )
+                : "0"}
+            </h3>
           </div>
         </section>
       </section>
