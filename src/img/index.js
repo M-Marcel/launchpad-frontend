@@ -6,8 +6,8 @@ import telegramFooter from "./telegram-footer.svg";
 import mediumFooter from "./medium-footer.svg";
 import twitterFooter from "./twitter-footer.svg";
 
-import coinLeft from "./bg-coin-left.svg";
-import coinRight from "./bg-coin-right.svg";
+import coinLeft from "./coin-left.png";
+import coinRight from "./coin-right.png";
 import color1 from "./eclipse-top-left.svg";
 import color2 from "./eclipse-top-right.svg";
 import coin from "./coin.png";
