@@ -45,6 +45,6 @@ export default function useCheckpointsState() {
             }
         }
         updateCheckpoint("Have $CLDX", false);
-    }, [user, bnbBalance, cloudaxBalance]);
+    }, [cloudaxBalance]);
     return { checkpoints, updateCheckpoint };
 }

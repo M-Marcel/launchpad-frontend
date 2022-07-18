@@ -1,0 +1,296 @@
+ [{
+         "inputs": [{
+                 "internalType": "address",
+                 "name": "_token",
+                 "type": "address"
+             },
+             {
+                 "internalType": "uint256",
+                 "name": "_maxStake",
+                 "type": "uint256"
+             }
+         ],
+         "stateMutability": "nonpayable",
+         "type": "constructor"
+     },
+     {
+         "anonymous": false,
+         "inputs": [{
+                 "indexed": false,
+                 "internalType": "uint256",
+                 "name": "amount",
+                 "type": "uint256"
+             },
+             {
+                 "indexed": true,
+                 "internalType": "address",
+                 "name": "_stakeholder",
+                 "type": "address"
+             }
+         ],
+         "name": "CloudrStaking",
+         "type": "event"
+     },
+     {
+         "anonymous": false,
+         "inputs": [{
+                 "indexed": true,
+                 "internalType": "address",
+                 "name": "previousOwner",
+                 "type": "address"
+             },
+             {
+                 "indexed": true,
+                 "internalType": "address",
+                 "name": "newOwner",
+                 "type": "address"
+             }
+         ],
+         "name": "OwnershipTransferred",
+         "type": "event"
+     },
+     {
+         "anonymous": false,
+         "inputs": [{
+             "indexed": false,
+             "internalType": "bytes32",
+             "name": "_status",
+             "type": "bytes32"
+         }],
+         "name": "SetStakingStatus",
+         "type": "event"
+     },
+     {
+         "anonymous": false,
+         "inputs": [{
+                 "indexed": true,
+                 "internalType": "address",
+                 "name": "_stakeholder",
+                 "type": "address"
+             },
+             {
+                 "indexed": false,
+                 "internalType": "uint256",
+                 "name": "amount",
+                 "type": "uint256"
+             }
+         ],
+         "name": "WithdrawFromStake",
+         "type": "event"
+     },
+     {
+         "anonymous": false,
+         "inputs": [{
+             "indexed": false,
+             "internalType": "uint256",
+             "name": "amount",
+             "type": "uint256"
+         }],
+         "name": "WithdrawResidual",
+         "type": "event"
+     },
+     {
+         "inputs": [],
+         "name": "cloudrToken",
+         "outputs": [{
+             "internalType": "contract IBEP20",
+             "name": "",
+             "type": "address"
+         }],
+         "stateMutability": "view",
+         "type": "function",
+         "constant": true
+     },
+     {
+         "inputs": [],
+         "name": "maxStake",
+         "outputs": [{
+             "internalType": "uint256",
+             "name": "",
+             "type": "uint256"
+         }],
+         "stateMutability": "view",
+         "type": "function",
+         "constant": true
+     },
+     {
+         "inputs": [],
+         "name": "minStake",
+         "outputs": [{
+             "internalType": "uint256",
+             "name": "",
+             "type": "uint256"
+         }],
+         "stateMutability": "view",
+         "type": "function",
+         "constant": true
+     },
+     {
+         "inputs": [],
+         "name": "owner",
+         "outputs": [{
+             "internalType": "address",
+             "name": "",
+             "type": "address"
+         }],
+         "stateMutability": "view",
+         "type": "function",
+         "constant": true
+     },
+     {
+         "inputs": [],
+         "name": "renounceOwnership",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+     },
+     {
+         "inputs": [],
+         "name": "rewardsPerHour",
+         "outputs": [{
+             "internalType": "uint256",
+             "name": "",
+             "type": "uint256"
+         }],
+         "stateMutability": "view",
+         "type": "function",
+         "constant": true
+     },
+     {
+         "inputs": [],
+         "name": "totalStaked",
+         "outputs": [{
+             "internalType": "uint256",
+             "name": "",
+             "type": "uint256"
+         }],
+         "stateMutability": "view",
+         "type": "function",
+         "constant": true
+     },
+     {
+         "inputs": [{
+             "internalType": "address",
+             "name": "newOwner",
+             "type": "address"
+         }],
+         "name": "transferOwnership",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+     },
+     {
+         "inputs": [{
+             "internalType": "uint256",
+             "name": "_amount",
+             "type": "uint256"
+         }],
+         "name": "stake",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+     },
+     {
+         "inputs": [],
+         "name": "getInfo",
+         "outputs": [{
+                 "internalType": "uint256",
+                 "name": "",
+                 "type": "uint256"
+             },
+             {
+                 "internalType": "uint256",
+                 "name": "",
+                 "type": "uint256"
+             },
+             {
+                 "internalType": "uint256",
+                 "name": "",
+                 "type": "uint256"
+             },
+             {
+                 "internalType": "uint256",
+                 "name": "",
+                 "type": "uint256"
+             },
+             {
+                 "internalType": "uint256",
+                 "name": "",
+                 "type": "uint256"
+             },
+             {
+                 "internalType": "bool",
+                 "name": "",
+                 "type": "bool"
+             }
+         ],
+         "stateMutability": "view",
+         "type": "function",
+         "constant": true
+     },
+     {
+         "inputs": [{
+             "internalType": "uint256",
+             "name": "amount",
+             "type": "uint256"
+         }],
+         "name": "unstake",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+     },
+     {
+         "inputs": [],
+         "name": "withdrawResidualBalance",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+     },
+     {
+         "inputs": [{
+             "internalType": "address",
+             "name": "_user",
+             "type": "address"
+         }],
+         "name": "getDepositInfo",
+         "outputs": [{
+                 "internalType": "uint256",
+                 "name": "_stake",
+                 "type": "uint256"
+             },
+             {
+                 "internalType": "uint256",
+                 "name": "_rewards",
+                 "type": "uint256"
+             }
+         ],
+         "stateMutability": "view",
+         "type": "function",
+         "constant": true
+     },
+     {
+         "inputs": [{
+             "internalType": "uint256",
+             "name": "_rewardsPerHour",
+             "type": "uint256"
+         }],
+         "name": "setRewardsPerHour",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+     },
+     {
+         "inputs": [],
+         "name": "openStaking",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+     },
+     {
+         "inputs": [],
+         "name": "closeStaking",
+         "outputs": [],
+         "stateMutability": "nonpayable",
+         "type": "function"
+     }
+ ]

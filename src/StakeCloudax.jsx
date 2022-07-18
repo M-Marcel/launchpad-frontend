@@ -4,10 +4,34 @@ import CheckpointsCard from "./components/CheckpointsCard";
 import Stake from "./components/Stake";
 import Unstake from "./components/Unstake";
 import useCheckpointsState from "./hooks/useCheckpointsState";
+import STAKING_ABI from "./abis/Staking.json";
+import { useMoralis } from "react-moralis";
+import useStaking from "./hooks/useStaking";
+import { toEther } from "./utils/web3";
+import { inThousands, calculateAPY } from "./utils/modifiers";
+import useGetCloudaxBalance from "./hooks/useGetCloudaxBalance";
 
 function StakeCloudax() {
   const { checkpoints, updateCheckpoint } = useCheckpointsState();
   const [appOption, setAppOption] = React.useState("stake");
+  const cloudaxBalance = useGetCloudaxBalance();
+  const { user } = useMoralis();
+  const stakingOptions = {
+    ABI: STAKING_ABI,
+    userAddress: user?.get("ethAddress"),
+    address: process.env.REACT_APP_STAKING_ADDRESS,
+  };
+  const {
+    stakingInfo,
+    userStake,
+    stake,
+    unstake,
+    loadStakingInfo,
+    getUserStake,
+  } = useStaking(stakingOptions);
+  React.useEffect(() => {
+    console.log(stakingInfo);
+  }, [stakingInfo]);
   React.useEffect(() => {
     updateCheckpoint("Enter Amount", false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -19,9 +43,8 @@ function StakeCloudax() {
           Stake Cloudax to Earn Rewards
         </h3>
         <p className="StakeCloudax__hero__explainer">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit sapien
-          ultricies est sapien sed maecenas amet sem id. In hendrerit auctor
-          urna pellentesque sed.
+          Stake your $CLDX token and earn passive income with our high APY
+          staking program without risk.
         </p>
         <div className="StakeCloudax__hero_ctas text-dark">
           <ConnectWallet />
@@ -30,21 +53,27 @@ function StakeCloudax() {
         <section className="StakeCloudax__stat-cards">
           <div className="glass StakeCloudax__stat-card">
             <h3 className="StakeCloudax__stat-cards__title">Your Stake</h3>
-            <h3 className="StakeCloudax__stat-cards__value">324822 CLDX</h3>
+            <h3 className="StakeCloudax__stat-cards__value">
+              {inThousands(Number(toEther(userStake)).toFixed(2))} CLDX
+            </h3>
           </div>
           <div className="glass StakeCloudax__stat-card">
             <h3 className="StakeCloudax__stat-cards__title">
               Number of Stakers
             </h3>
-            <h3 className="StakeCloudax__stat-cards__value">16904</h3>
+            <h3 className="StakeCloudax__stat-cards__value">
+              {inThousands(stakingInfo?.stakersCount || "0")}
+            </h3>
           </div>
           <div className="glass StakeCloudax__stat-card">
             <h3 className="StakeCloudax__stat-cards__title">APY</h3>
-            <h3 className="StakeCloudax__stat-cards__value">300.3%</h3>
+            <h3 className="StakeCloudax__stat-cards__value">
+              {calculateAPY(parseInt(stakingInfo?.rewardsPerHour || "0"))}%
+            </h3>
           </div>
           <div className="glass StakeCloudax__stat-card">
             <h3 className="StakeCloudax__stat-cards__title">
-              Total Value Restore
+              Total Value Locked
             </h3>
             <h3 className="StakeCloudax__stat-cards__value">$12,343,365</h3>
           </div>
@@ -75,9 +104,23 @@ function StakeCloudax() {
             </button>
           </div>
           {appOption === "stake" && (
-            <Stake updateCheckpoint={updateCheckpoint} />
+            <Stake
+              stake={stake}
+              cloudaxBalance={cloudaxBalance}
+              updateCheckpoint={updateCheckpoint}
+              reloadStakingInfo={loadStakingInfo}
+              getUserStake={getUserStake}
+            />
           )}
-          {appOption === "unstake" && <Unstake />}
+          {appOption === "unstake" && (
+            <Unstake
+              unstake={unstake}
+              cloudaxBalance={cloudaxBalance}
+              updateCheckpoint={updateCheckpoint}
+              reloadStakingInfo={loadStakingInfo}
+              getUserStake={getUserStake}
+            />
+          )}
         </div>
         <CheckpointsCard checkpoints={checkpoints} />
       </section>
