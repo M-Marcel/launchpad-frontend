@@ -31,16 +31,16 @@ function App() {
       <div className='relative overflow-hidden text-white max-w-[1512px] mx-auto App max-h-fit bg-dark font-dmsans'>
         <img src={color1} alt='bg-color' className='absolute top-0 left-0 -z-4' />
         <img src={color2} alt='bg-color' className='absolute top-0 right-0 -z-4' />
-        <img
+        {/* <img
           src={coinRight}
           alt='bg-color'
           className='absolute hidden md:block md:w-auto md:h-auto max-h-[718.04px] z-0 top-[13%] right-[-55px]'
-        />
-        <img
+        /> */}
+        {/* <img
           src={coinLeft}
           alt='bg-color'
           className='absolute hidden md:block md:w-auto md:h-auto max-h-[718.04px] top-[55%] z-0 left-0'
-        />
+        /> */}
         <Nav />
 
         <Routes>

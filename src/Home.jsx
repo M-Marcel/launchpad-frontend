@@ -53,7 +53,7 @@ function Home() {
           </div>
         </div>
 
-        <p className="relative z-50 px-8 text lg:text-center max-w-[639.42px] mx-auto lg:px-0 margin">
+        <p className="relative z-50 px-8 text lg:text-center max-w-[639.42px] leading-6 lg:leading-8 mx-auto lg:px-0 margin">
           $CLDX is the native and utility token designed to power the
           ever-expanding and innovative cloudax ecosystem. Built to last with a
           hyper deflatinary mechanism which include qauterly buybacks/burn and
