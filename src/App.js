@@ -6,10 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useMoralis } from "react-moralis";
 import { useEffect } from "react";
 import {
-  coinRight,
   color1,
-  color2,
-  coinLeft,
+  color2
 } from "./img/index";
 import StakeCloudax from "./StakeCloudax";
 

@@ -1,24 +1,18 @@
 import React from "react";
 import { useMoralis } from "react-moralis";
 
-function CheckpointsCard({ checkpoints }) {
+function CheckpointsCard({ checkpoints, bnbBalance }) {
   const { isInitialized } = useMoralis();
   const explainers = {
-    "Connect Wallet":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, pharetra, viverra accumsan curabitur tincidunt faucibus quam quam.",
-    "Have $CLDX":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, pharetra, viverra accumsan curabitur tincidunt faucibus quam quam.",
-    "Enter Amount":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, pharetra, viverra accumsan curabitur tincidunt faucibus quam quam.",
-    "Have $BNB":
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Non, pharetra, viverra accumsan curabitur tincidunt faucibus quam quam.",
+    "Connect Wallet": "Wallet connection is required to proceed with Staking/Unstaking.",
+    "Have $CLDX": "Buy & Fund your wallet with $CLDX to stake and earn rewards.",
+    "Enter Amount": "Enter a staking/unstaking amount to complete action.",
+    "Have $BNB": `BNB is required to pay network transaction fees. Your BNB Balance is: BNB ${bnbBalance}`, 
   };
   return (
     <div className="glass CheckpointsCard">
       <h3 className="CheckpointsCard__heading">Check Points</h3>
-      <h5 className="text-xs mb-[34px] lg:mb-[40px]">
-        You need to do the following to complete staking.
-      </h5>
+      <h5 className="text-xs mb-[34px] lg:mb-[40px]">You need to do the following to complete staking.</h5>
       <div className="grid grid-cols-1 gap-5">
         {Object.keys(checkpoints).map((checkpoint, index) => (
           <div key={index} className="flex">
