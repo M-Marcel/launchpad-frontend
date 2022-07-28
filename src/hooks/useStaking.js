@@ -26,7 +26,7 @@ export default function useStaking({ address, ABI, userAddress }) {
     const [stakingInfo, setStakingInfo] = React.useState(null);
     const { web3, isInitialized } = useMoralis();
 
-    async function loadStakingInfo() {
+    async function loadStakingInfo() { 
         loadStaking({
             chain: process.env.REACT_APP_NET_ID,
             address: address,
