@@ -1,4 +1,4 @@
-name: launchpad
+name: cloudx-launchpad
 
 on:
   push:
@@ -21,10 +21,18 @@ jobs:
     # env:
     #   NODE_ENV: "developmenbt"
 
+
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@master
+      - name: Set env to dev
+        if: endsWith(github.ref, '/dev')
+        run: |
+          echo "application_name=launchpad" >> $GITHUB_ENV
+          echo "environment_name=launchpad-env" >> $GITHUB_ENV
+          echo "NODE_ENV=development" >> $GITHUB_ENV
       - name: Set env to production
+        if: endsWith(github.ref, '/main')
         run: |
           echo "application_name=launchpad" >> $GITHUB_ENV
           echo "environment_name=launchpad-env" >> $GITHUB_ENV
@@ -32,7 +40,7 @@ jobs:
       - name: Setup node env 🏗
         uses: actions/setup-node@v3
         with:
-          node-version: 14
+          node-version: 16
       - name: Cache node_modules 📦
         uses: actions/cache@v2
         with:
@@ -43,10 +51,11 @@ jobs:
       - name: Installing NPM
         run: npm install
 
-      #- name: Starting Application
-        #run: npm run start
-      - name: Building application 
-        run: npm build
+      # - name: Linting check
+      #   run: npm run lint#
+
+      #- name: Building application 
+       # run: npm build
 
       - name: Generate deployment package
         run: zip -r deploy.zip * .[^.]* -x "**node_modules**"
