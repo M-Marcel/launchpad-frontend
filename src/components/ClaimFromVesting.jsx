@@ -53,7 +53,7 @@ function ClaimFromVesting({
     <button
       disabled={!claimable}
       onClick={async () => await claimTokensFromVesting(scheduleId)}
-      className="text-black btn2"
+      className="text-black btn2 disabled:bg-gray-400"
     >
       {claiming && (
         <FontAwesomeIcon icon={solid("spinner")} spin className="mr-2" />
