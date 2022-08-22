@@ -10,14 +10,14 @@
   }
 
   .btn {
-    @apply bg-myblue text duration-200 hover:bg-myblue2 z-50 px-6 h-[42px] flex items-center hover:-translate-y-1  rounded-3xl;
+    @apply bg-myblue text hover:bg-myblue2 z-50 px-6 h-[42px] flex items-center hover:-translate-y-1  rounded-3xl;
   }
   .btn2 {
-    @apply bg-myblue text duration-200 hover:bg-myblue2 h-[42px] flex items-center z-50 px-6 py-1  rounded-3xl
+    @apply bg-myblue text hover:bg-myblue2 h-[42px] flex items-center z-50 px-6 py-1  rounded-3xl
     hover:-translate-y-1;
   }
   .btn2-border {
-    @apply border-2 bg-transparent border-myblue h-[42px] flex items-center text duration-200 hover:-translate-y-1 hover:bg-myblue z-50 px-6 py-1  rounded-3xl;
+    @apply border-2 bg-transparent border-myblue h-[42px] flex items-center text hover:-translate-y-1 hover:bg-myblue z-50 px-6 py-1  rounded-3xl;
   }
 
   .hero {

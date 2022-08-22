@@ -1,8 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { isSuccessfulTransaction } from "./utils/web3";
-import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
+import BouncingDotsLoader from "./components/BouncingDotsLoader";
 import { toEther } from "./utils/web3";
 
 export default function BuyPresale({
@@ -76,10 +76,9 @@ export default function BuyPresale({
         onClick={async () => await buy()}
         className="ml-[30%] md:ml-[40%] mt-4 lg:ml-24 xl:ml-10 xl:mt-0 text-black btn2"
       >
-        {buying && (
-          <FontAwesomeIcon icon={solid("spinner")} spin className="mr-2" />
+        Swap {buying && (
+          <BouncingDotsLoader />
         )}
-        Swap
       </button>
     </div>
   );

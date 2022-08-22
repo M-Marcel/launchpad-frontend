@@ -20,6 +20,7 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       "Amount must be less than or equal to sale max": "Cannot swap above maximum BUSD amount",
       "Sale cap has been reached": "Presale has reached maximum BUSD amount",
       "You have bought this sale": `${userAddress} has bought this presale`,
+      "Sale is not active": "Presale hasn't started yet!"
     },
   };
 
@@ -69,7 +70,29 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userAddress, launchpad]);
-  const buyLaunchpadSale = async (amount) => {
+  const approveBUSD = async (amount) => {
+    try {
+      const tx = await paymentMethod.connect(web3.getSigner()).approve(launchpad.address, amount);
+      if (isSuccessfulTransaction(tx)) {
+        return true;
+      }
+      throw Error("Couldn't approve BUSD");
+    } catch (e) {
+      handleError(e);
+    }
+  }
+  const handleError = (err) => {
+    const verbose = err.data?.message;
+    if (verbose) {
+      for (var x in checkpoints.buy) {
+        if (verbose.includes(x)) {
+          throw Error(checkpoints.buy[x]);
+        }
+      }
+    }
+    throw err;
+  }
+  const validateBuyData = (amount) => {
     if (!web3) {
       throw Error("Please connect a crypto wallet!");
     }
@@ -82,24 +105,15 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       }
       throw Error("Please provide a valid amount");
     }
-    const etherAmount = ethers.utils.parseEther(amount.toString());
+    return ethers.utils.parseEther(amount.toString());
+  }
+  const buyLaunchpadSale = async (amount) => {
+    const etherAmount = validateBuyData(amount);
     try {
-      const approveTrx = await paymentMethod.connect(web3.getSigner()).approve(launchpad.address, etherAmount);
-      const isSuccessful = await isSuccessfulTransaction(approveTrx);
-      if (isSuccessful) {
-        const transaction = await launchpad.connect(web3.getSigner()).buyLaunchpadSale(sale, etherAmount);
-        return transaction;
-      }
+      const transaction = await launchpad.connect(web3.getSigner()).buyLaunchpadSale(sale, etherAmount);
+      return transaction;
     } catch (e) {
-      const verbose = e.data?.message;
-      if (verbose) {
-        for (var x in checkpoints.buy) {
-          if (verbose.includes(x)) {
-            throw Error(checkpoints.buy[x]);
-          }
-        }
-      }
-      throw e;
+      handleError(e);
     }
   };
   const claimFromVestingSchedule = async (scheduleId) => {
@@ -126,5 +140,6 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     canClaimFromSchedule,
     loadLaunchpad,
     loadUserVestingSchedules,
+    approveBUSD, paymentMethod,
   };
 }
