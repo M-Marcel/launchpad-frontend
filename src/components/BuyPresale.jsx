@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { isSuccessfulTransaction } from "./utils/web3";
-import BouncingDotsLoader from "./components/BouncingDotsLoader";
-import { toEther } from "./utils/web3";
+import { isSuccessfulTransaction } from "../utils/web3";
+import BouncingDotsLoader from "./BouncingDotsLoader";
+import { toEther } from "../utils/web3";
 
 export default function BuyPresale({
   buyPresale,
@@ -58,7 +57,7 @@ export default function BuyPresale({
   };
   return (
     <div className="w-full mt-10 xl:flex xl:items-end">
-      <div className="md:w-[400px] xl:w-[400px] lg:w-[300px] ml-[10%] md:ml-[17%] lg:ml-0">
+      <div className="md:w-[400px] xl:w-[400px] lg:w-[300px] md:ml-[17%] lg:ml-0">
         {hasAllocation && (
           <label className="block mb-2 text-white">Your BUSD Allocation</label>
         )}
@@ -67,18 +66,16 @@ export default function BuyPresale({
           value={presaleAmount}
           onChange={(e) => setPresaleAmount(e.target.value)}
           onInput={(e) => setPresaleAmount(e.target.value)}
-          className="xl:h-[30px] h-[15px] w-full rounded-full text2  text-black py-4 lg:py-5 xl:py-6 px-4 lg:px-10 border-0 text2 outline-none bg-white"
+          className="xl:h-[30px] h-[15px] w-full rounded-full text2  text-black py-4 lg:py-5 xl:py-6 px-4 lg:px-6 border-0 text2 outline-none bg-white"
           placeholder="BUSD Amount"
         />
       </div>
       <button
         disabled={buying}
         onClick={async () => await buy()}
-        className="ml-[30%] md:ml-[40%] mt-4 lg:ml-24 xl:ml-10 xl:mt-0 text-black btn2"
+        className="md:ml-[40%] mt-4 lg:ml-10 xl:ml-10 xl:mt-0 text-black btn2 w-fit mx-auto lg:mx-0"
       >
-        Swap {buying && (
-          <BouncingDotsLoader />
-        )}
+        Swap {buying && <BouncingDotsLoader />}
       </button>
     </div>
   );
