@@ -189,7 +189,7 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       buyLaunchpadSale,
       claimFromVestingSchedule,
       canClaimFromSchedule,
-      checkApprovedAmount,
+      checkBUSDAllowance: checkApprovedAmount,
       core: launchpad,
       loadLaunchpad,
       loadUserVestingSchedules,

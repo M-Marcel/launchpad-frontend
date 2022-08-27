@@ -5,16 +5,31 @@ import Swal from "sweetalert2";
 
 function ApproveAmount({ amount, launchpadState, launchpadHelpers }) {
   const {
-    launchpadSale: { saleMin },
+    launchpadSale: { saleMin, saleMax },
   } = launchpadState;
-  const { approveBUSD } = launchpadHelpers;
+  const { approveBUSD, checkBUSDAllowance } = launchpadHelpers;
   const numberishAmount = parseFloat(amount);
   const saleMinFloat = parseFloat(toEther(saleMin));
-  const [approveState, setApproveState] = React.useState("Approve");
+  const saleMaxFloat = parseFloat(toEther(saleMax));
+  const [approveState, setApproveState] = React.useState("Approved");
+
+  const allowanceCheck = async () => {
+    const allowance = await checkBUSDAllowance();
+    const allowanceFloat = parseFloat(toEther(allowance));
+    if (
+      numberishAmount >= saleMinFloat &&
+      allowanceFloat < numberishAmount &&
+      numberishAmount <= saleMaxFloat
+    ) {
+      setApproveState("Approve");
+    } else {
+      setApproveState("Approved");
+    }
+  };
 
   React.useEffect(() => {
-    if (numberishAmount >= saleMinFloat) {
-      setApproveState("Approve");
+    if (!isNaN(numberishAmount)) {
+      allowanceCheck();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numberishAmount]);
