@@ -16,11 +16,13 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   const checkpoints = {
     buy: {
       "Buyer is not on the whitelist": `${userAddress} is not whitelisted for this presale`,
-      "Amount must be greater than or equal to sale min": "Cannot swap below minimum BUSD amount",
-      "Amount must be less than or equal to sale max": "Cannot swap above maximum BUSD amount",
+      "Amount must be greater than or equal to sale min":
+        "Cannot swap below minimum BUSD amount",
+      "Amount must be less than or equal to sale max":
+        "Cannot swap above maximum BUSD amount",
       "Sale cap has been reached": "Presale has reached maximum BUSD amount",
       "You have bought this sale": `${userAddress} has bought this presale`,
-      "Sale is not active": "Presale hasn't started yet!"
+      "Sale is not active": "Presale hasn't started yet!",
     },
   };
 
@@ -45,7 +47,10 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   }
 
   async function loadUserVestingSchedules() {
-    const schedules = await launchpad.getUserVestingScheduleBySale(sale, userAddress);
+    const schedules = await launchpad.getUserVestingScheduleBySale(
+      sale,
+      userAddress
+    );
     setUserVestingSchedule(schedules);
   }
 
@@ -57,8 +62,26 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   }, [isInitialized]);
   useEffect(() => {
     if (launchpadData) {
-      const [saleRate, isActive, saleMin, saleMax, saleCap, sold, hasWhitelist, hasAllocation] = launchpadData[sale];
-      setLaunchpadSale({ saleRate, isActive, saleMin, saleMax, saleCap, sold, hasWhitelist, hasAllocation });
+      const [
+        saleRate,
+        isActive,
+        saleMin,
+        saleMax,
+        saleCap,
+        sold,
+        hasWhitelist,
+        hasAllocation,
+      ] = launchpadData[sale];
+      setLaunchpadSale({
+        saleRate,
+        isActive,
+        saleMin,
+        saleMax,
+        saleCap,
+        sold,
+        hasWhitelist,
+        hasAllocation,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [launchpadData]);
@@ -70,9 +93,24 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userAddress, launchpad]);
+
+  const checkApprovedAmount = async () => {
+    if (paymentMethod) {
+      const approved = await paymentMethod.allowance(
+        userAddress,
+        launchpad.address
+      );
+      return approved.toString();
+    }
+    return 0;
+  };
+
   const approveBUSD = async (amount) => {
+    const etherAmount = validateBuyData(amount);
     try {
-      const tx = await paymentMethod.connect(web3.getSigner()).approve(launchpad.address, amount);
+      const tx = await paymentMethod
+        .connect(web3.getSigner())
+        .approve(launchpad.address, etherAmount);
       if (isSuccessfulTransaction(tx)) {
         return true;
       }
@@ -80,7 +118,8 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     } catch (e) {
       handleError(e);
     }
-  }
+  };
+
   const handleError = (err) => {
     const verbose = err.data?.message;
     if (verbose) {
@@ -91,7 +130,8 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       }
     }
     throw err;
-  }
+  };
+
   const validateBuyData = (amount) => {
     if (!web3) {
       throw Error("Please connect a crypto wallet!");
@@ -106,16 +146,20 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       throw Error("Please provide a valid amount");
     }
     return ethers.utils.parseEther(amount.toString());
-  }
+  };
+
   const buyLaunchpadSale = async (amount) => {
     const etherAmount = validateBuyData(amount);
     try {
-      const transaction = await launchpad.connect(web3.getSigner()).buyLaunchpadSale(sale, etherAmount);
+      const transaction = await launchpad
+        .connect(web3.getSigner())
+        .buyLaunchpadSale(sale, etherAmount);
       return transaction;
     } catch (e) {
       handleError(e);
     }
   };
+
   const claimFromVestingSchedule = async (scheduleId) => {
     const schedule = userVestingSchedule[scheduleId];
     if (!(await canClaimFromSchedule(scheduleId))) {
@@ -123,23 +167,39 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     }
     const transaction = await launchpad
       .connect(web3.getSigner())
-      .release(sale, scheduleId, ethers.utils.parseEther(toEther(schedule.totalAmount.toString())));
+      .release(
+        sale,
+        scheduleId,
+        ethers.utils.parseEther(toEther(schedule.totalAmount.toString()))
+      );
     return transaction;
   };
+
   const canClaimFromSchedule = async (scheduleId) => {
     const currentBlockTime = await launchpad.getCurrentTime();
     const schedule = userVestingSchedule[scheduleId];
-    return currentBlockTime.gte(schedule.startTime.add(schedule.duration)) && schedule.totalAmount.gt(schedule.releasedAmount);
+    return (
+      currentBlockTime.gte(schedule.startTime.add(schedule.duration)) &&
+      schedule.totalAmount.gt(schedule.releasedAmount)
+    );
   };
   return {
-    launchpad,
-    launchpadSale,
-    userVestingSchedule,
-    buyLaunchpadSale,
-    claimFromVestingSchedule,
-    canClaimFromSchedule,
-    loadLaunchpad,
-    loadUserVestingSchedules,
-    approveBUSD, paymentMethod,
+    helpers: {
+      approveBUSD,
+      buyLaunchpadSale,
+      claimFromVestingSchedule,
+      canClaimFromSchedule,
+      checkApprovedAmount,
+      core: launchpad,
+      loadLaunchpad,
+      loadUserVestingSchedules,
+    },
+    state: {
+      launchpadSale,
+      userVestingSchedule,
+      paymentMethod,
+      saleId: sale,
+      userAddress,
+    },
   };
 }

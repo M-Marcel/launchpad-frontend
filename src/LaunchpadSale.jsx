@@ -15,41 +15,24 @@ export default function LaunchpadSale({ sale }) {
     address: process.env.REACT_APP_LAUNCHPAD_ADDRESS,
   };
 
-  const {
-    launchpadSale,
-    userVestingSchedule,
-    buyLaunchpadSale,
-    loadUserVestingSchedules,
-    loadLaunchpad,
-    claimFromVestingSchedule,
-    canClaimFromSchedule,
-    launchpad,
-  } = useLaunchpad(launchpadOptions);
+  const { helpers: launchpadHelpers, state: launchpadState } =
+    useLaunchpad(launchpadOptions);
   return (
     <section>
-      {launchpadSale ? (
+      {launchpadState.launchpadSale ? (
         <section className="z-50 padding margin2">
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <PresaleCard
-              launchpad={launchpad}
-              loadLaunchpad={loadLaunchpad}
-              buyLaunchpadSale={buyLaunchpadSale}
-              loadUserVestingSchedules={loadUserVestingSchedules}
-              sale={sale}
-              userAddress={user?.get("ethAddress")}
-              userVestingSchedule={userVestingSchedule}
+              launchpadState={launchpadState}
+              launchpadHelpers={launchpadHelpers}
             />
-            <PresaleInfo presale={launchpadSale} saleId={sale} />
+            <PresaleInfo launchpadState={launchpadState} />
             <ReferralSystem />
           </div>
-          {userVestingSchedule && userVestingSchedule.length > 0 && (
-            <VestingSchedule
-              loadVesting={loadUserVestingSchedules}
-              vestingSchedule={userVestingSchedule}
-              claimTokens={claimFromVestingSchedule}
-              canClaim={canClaimFromSchedule}
-            />
-          )}
+          {launchpadState.userVestingSchedule &&
+            launchpadState.userVestingSchedule.length > 0 && (
+              <VestingSchedule launchpadHelpers={launchpadHelpers} />
+            )}
         </section>
       ) : (
         ""

@@ -4,17 +4,9 @@ import { toEther } from "../utils/web3";
 import { inThousands } from "../utils/modifiers";
 import BuyPresale from "./BuyPresale";
 
-function PresaleCard({
-  launchpadSale,
-  launchpad,
-  loadUserVestingSchedules,
-  loadLaunchpad,
-  sale,
-  userVestingSchedule,
-  buyLaunchpadSale,
-  userAddress,
-}) {
+function PresaleCard({ launchpadState, launchpadHelpers }) {
   const [soldPercent, setSoldPercent] = useState(0);
+  const { launchpadSale, userVestingSchedule } = launchpadState;
   useEffect(() => {
     if (launchpadSale) {
       const sold = toEther(launchpadSale.sold);
@@ -43,13 +35,8 @@ function PresaleCard({
       </div>
       {!userVestingSchedule?.length > 0 && (
         <BuyPresale
-          hasAllocation={launchpadSale?.hasAllocation}
-          buyPresale={buyLaunchpadSale}
-          reloadLaunchpad={loadLaunchpad}
-          launchpad={launchpad}
-          sale={sale}
-          userAddress={userAddress}
-          reloadVesting={loadUserVestingSchedules}
+          launchpadState={launchpadState}
+          launchpadHelpers={launchpadHelpers}
         />
       )}
     </div>

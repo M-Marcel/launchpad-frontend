@@ -15,7 +15,7 @@ function ReferralLink() {
         Your Referral Link
       </h3>
       <input
-        readonly
+        readOnly={true}
         className="xl:h-[30px] h-[15px] w-full rounded-full text2  text-black py-4 lg:py-5 xl:py-6 px-4 lg:px-6 border-0 text2 outline-none bg-slate-200 block mb-5"
         placeholder="Referral Link"
         aria-label="Referral Link"

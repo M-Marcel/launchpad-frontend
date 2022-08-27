@@ -3,12 +3,8 @@ import moment from "moment";
 import { inThousands } from "./utils/modifiers";
 import ClaimFromVesting from "./components/ClaimFromVesting";
 
-export default function VestingSchedule({
-  vestingSchedule,
-  claimTokens,
-  canClaim,
-  loadVesting,
-}) {
+export default function VestingSchedule({ launchpadState, launchpadHelpers }) {
+  const { userVestingSchedule: vestingSchedule } = launchpadState;
   const totalVested = vestingSchedule
     .map((sch) => toEther(sch.totalAmount))
     .reduce((a, b) => parseFloat(a) + parseFloat(b));
@@ -50,10 +46,9 @@ export default function VestingSchedule({
                 </td>
                 <td className="px-6 py-6">
                   <ClaimFromVesting
-                    canClaim={canClaim}
-                    claimTokens={claimTokens}
+                    launchpadState={launchpadState}
+                    launchpadHelpers={launchpadHelpers}
                     scheduleId={index}
-                    reloadVesting={loadVesting}
                   />
                 </td>
               </tr>

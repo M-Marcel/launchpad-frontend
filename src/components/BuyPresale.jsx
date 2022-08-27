@@ -3,21 +3,30 @@ import Swal from "sweetalert2";
 import { isSuccessfulTransaction } from "../utils/web3";
 import BouncingDotsLoader from "./BouncingDotsLoader";
 import { toEther } from "../utils/web3";
+import ApproveAmount from "./ApproveAmount";
 
-export default function BuyPresale({
-  buyPresale,
-  reloadVesting,
-  reloadLaunchpad,
-  hasAllocation,
-  launchpad,
-  sale,
-  userAddress,
-}) {
+export default function BuyPresale({ launchpadState, launchpadHelpers }) {
+  const {
+    core: launchpad,
+    buyLaunchpadSale: buyPresale,
+    loadLaunchpad: reloadLaunchpad,
+    loadUserVestingSchedules: reloadVesting,
+  } = launchpadHelpers;
+  const {
+    saleId,
+    userAddress,
+    launchpadSale: { hasAllocation },
+  } = launchpadState;
   const [presaleAmount, setPresaleAmount] = useState("");
+  const [buying, setBuying] = useState(false);
+
   useEffect(() => {
     async function getUserAllocation() {
       try {
-        const userAllocation = await launchpad.allocatedBuy(sale, userAddress);
+        const userAllocation = await launchpad.allocatedBuy(
+          saleId,
+          userAddress
+        );
         setPresaleAmount(toEther(userAllocation));
       } catch (e) {
         setPresaleAmount(0);
@@ -27,8 +36,8 @@ export default function BuyPresale({
     if (hasAllocation && launchpad && userAddress) {
       getUserAllocation();
     }
-  }, [hasAllocation, launchpad, userAddress, sale]);
-  const [buying, setBuying] = useState(false);
+  }, [hasAllocation, launchpad, userAddress, saleId]);
+
   const buy = async () => {
     try {
       setBuying(true);
@@ -56,8 +65,8 @@ export default function BuyPresale({
     }
   };
   return (
-    <div className="w-full mt-10 xl:flex xl:items-end">
-      <div className="md:w-[400px] xl:w-[400px] lg:w-[300px] md:ml-[17%] lg:ml-0">
+    <div className="w-full mt-8 lg:mt-10">
+      <div>
         {hasAllocation && (
           <label className="block mb-2 text-white">Your BUSD Allocation</label>
         )}
@@ -70,13 +79,20 @@ export default function BuyPresale({
           placeholder="BUSD Amount"
         />
       </div>
-      <button
-        disabled={buying}
-        onClick={async () => await buy()}
-        className="md:ml-[40%] mt-4 lg:ml-10 xl:ml-10 xl:mt-0 text-black btn2 w-fit mx-auto lg:mx-0"
-      >
-        Swap {buying && <BouncingDotsLoader />}
-      </button>
+      <div className="flex items-center justify-center mt-4">
+        <ApproveAmount
+          amount={presaleAmount}
+          launchpadState={launchpadState}
+          launchpadHelpers={launchpadHelpers}
+        />
+        <button
+          disabled={buying}
+          onClick={async () => await buy()}
+          className="text-black btn2 w-fit"
+        >
+          Swap {buying && <BouncingDotsLoader />}
+        </button>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-function PresaleInfo({ presale, saleId }) {
+function PresaleInfo({ launchpadState: { launchpadSale: presale, saleId } }) {
   const accessTypes = ["Private", "Public"];
   const tokenTicker = process.env.REACT_APP_TOKEN_TICKER;
   return (
