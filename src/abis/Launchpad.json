@@ -236,6 +236,28 @@
     "constant": true
   },
   {
+    "inputs": [{
+        "internalType": "enum CloudrLaunchpad.Presale",
+        "name": "",
+        "type": "uint8"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "referralEarning",
+    "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
     "inputs": [],
     "name": "renounceOwnership",
     "outputs": [],
@@ -381,6 +403,11 @@
           "internalType": "uint256",
           "name": "saleAllocated",
           "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleEndDate",
+          "type": "uint256"
         }
       ],
       "internalType": "struct CloudrLaunchpad.LaunchpadSale[]",
@@ -442,6 +469,11 @@
         {
           "internalType": "uint256",
           "name": "saleAllocated",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "saleEndDate",
           "type": "uint256"
         }
       ],
@@ -519,9 +551,47 @@
         "internalType": "uint256",
         "name": "busdAmount",
         "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "referrer",
+        "type": "address"
       }
     ],
     "name": "buyLaunchpadSale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{
+        "internalType": "enum CloudrLaunchpad.Presale",
+        "name": "sale",
+        "type": "uint8"
+      },
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      }
+    ],
+    "name": "getReferralEarnings",
+    "outputs": [{
+      "internalType": "uint256",
+      "name": "",
+      "type": "uint256"
+    }],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [{
+      "internalType": "enum CloudrLaunchpad.Presale",
+      "name": "sale",
+      "type": "uint8"
+    }],
+    "name": "claimReferralEarnings",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -657,6 +727,17 @@
       "type": "address"
     }],
     "name": "withdrawResidualBalance",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [{
+      "internalType": "uint256",
+      "name": "percent",
+      "type": "uint256"
+    }],
+    "name": "setReferrerPercent",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
