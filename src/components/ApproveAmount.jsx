@@ -3,7 +3,12 @@ import { toEther } from "../utils/web3";
 import BouncingDotsLoader from "./BouncingDotsLoader";
 import Swal from "sweetalert2";
 
-function ApproveAmount({ amount, launchpadState, launchpadHelpers }) {
+function ApproveAmount({
+  amount,
+  launchpadState,
+  launchpadHelpers,
+  proceedToBuy,
+}) {
   const {
     launchpadSale: { saleMin, saleMax },
   } = launchpadState;
@@ -44,7 +49,14 @@ function ApproveAmount({ amount, launchpadState, launchpadHelpers }) {
           text: `You have approved ${amount} BUSD for swapping.`,
           title: "Approved!",
           icon: "success",
-          confirmButtonText: "Next",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Complete Swap",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            proceedToBuy();
+          }
         });
       }
     } catch (e) {
@@ -65,7 +77,8 @@ function ApproveAmount({ amount, launchpadState, launchpadHelpers }) {
         approveState === "Approved" ? "hidden" : "mr-4"
       }`}
     >
-      {approveState} BUSD {approveState !== "Approve" && <BouncingDotsLoader />}
+      {approveState} {approveState === "Approve" ? "BUSD" : ""}{" "}
+      {approveState !== "Approve" && <BouncingDotsLoader />}
     </button>
   );
 }

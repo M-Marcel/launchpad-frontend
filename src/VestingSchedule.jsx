@@ -35,11 +35,14 @@ export default function VestingSchedule({ launchpadState, launchpadHelpers }) {
                 </td>
                 <td className="px-6 py-6">{percentage}%</td>
                 <td className="px-6 py-6">
-                  {moment
-                    .unix(
-                      parseInt(sch.startTime, 10) + parseInt(sch.duration, 10)
-                    )
-                    .format("YYYY-MM-DD HH:mm")}
+                  {index === 0
+                    ? "At the end of Presale"
+                    : moment
+                        .unix(
+                          parseInt(sch.startTime, 10) +
+                            parseInt(sch.duration, 10)
+                        )
+                        .format("YYYY-MM-DD HH:mm")}
                 </td>
                 <td className="px-6 py-6">
                   {inThousands(toEther(sch.releasedAmount))}

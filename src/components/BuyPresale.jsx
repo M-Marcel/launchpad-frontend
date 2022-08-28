@@ -84,6 +84,7 @@ export default function BuyPresale({ launchpadState, launchpadHelpers }) {
           amount={presaleAmount}
           launchpadState={launchpadState}
           launchpadHelpers={launchpadHelpers}
+          proceedToBuy={buy}
         />
         <button
           disabled={buying}
