@@ -4,6 +4,7 @@ import IBEP20 from "../abis/IBEP20.json";
 import useDataFromContractFunction from "./useDataFromContractFunction";
 import { ethers, isSuccessfulTransaction, toEther } from "../utils/web3";
 import { useSearchParams } from "react-router-dom";
+import ethereumAddress from "ethereum-address";
 
 const busdAddress = process.env.REACT_APP_BUSD_ADDRESS || null;
 
@@ -176,8 +177,8 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   };
 
   const buyLaunchpadSale = async (amount) => {
-    const referrer =
-      searchParams.get("ref") || "0x0000000000000000000000000000000000000000";
+    let referrerParam = searchParams.get("ref");
+    const referrer = ethereumAddress.isAddress(referrerParam) ? referrerParam : "0x0000000000000000000000000000000000000000";
     const etherAmount = validateBuyData(amount);
     try {
       const transaction = await launchpad
