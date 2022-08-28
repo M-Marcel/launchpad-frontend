@@ -4,6 +4,8 @@ import { isSuccessfulTransaction } from "../utils/web3";
 import BouncingDotsLoader from "./BouncingDotsLoader";
 import { toEther } from "../utils/web3";
 import ApproveAmount from "./ApproveAmount";
+import useGetBEP20Balance from "../hooks/useGetBEP20Balance";
+import { inThousands } from "../utils/modifiers";
 
 export default function BuyPresale({ launchpadState, launchpadHelpers }) {
   const {
@@ -17,6 +19,9 @@ export default function BuyPresale({ launchpadState, launchpadHelpers }) {
     userAddress,
     launchpadSale: { hasAllocation },
   } = launchpadState;
+  const busdBalance = useGetBEP20Balance({
+    address: process.env.REACT_APP_BUSD_ADDRESS,
+  });
   const [presaleAmount, setPresaleAmount] = useState("");
   const [buying, setBuying] = useState(false);
 
@@ -59,7 +64,7 @@ export default function BuyPresale({ launchpadState, launchpadHelpers }) {
       Swal.fire({
         icon: "error",
         text: e.message,
-        title: "Something went wrong!",
+        title: "Swap error!",
       });
       setBuying(false);
     }
@@ -78,6 +83,13 @@ export default function BuyPresale({ launchpadState, launchpadHelpers }) {
           className="xl:h-[30px] h-[15px] w-full rounded-full text2  text-black py-4 lg:py-5 xl:py-6 px-4 lg:px-6 border-0 text2 outline-none bg-white"
           placeholder="BUSD Amount"
         />
+        <div className="mt-2 text-xs text-slate-200">
+          Balance:{" "}
+          {inThousands(
+            Number(parseFloat(toEther(busdBalance || "0"))).toFixed(2)
+          )}{" "}
+          BUSD
+        </div>
       </div>
       <div className="flex items-center justify-center mt-4">
         <ApproveAmount

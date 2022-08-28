@@ -27,8 +27,7 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       "Sale cap has been reached": "Presale has reached maximum BUSD amount",
       "You have bought this sale": `${userAddress} has bought this presale`,
       "Sale is not active": "Presale hasn't started yet!",
-      "transfer amount exceeds balance":
-        "You don't have enough BUSD to buy this sale",
+      "transfer amount exceeds balance": "You don't have enough BUSD to swap",
     },
   };
 
