@@ -10,14 +10,14 @@
   }
 
   .btn {
-    @apply bg-myblue text duration-200 hover:bg-myblue2 z-50 px-6 h-[42px] flex items-center hover:-translate-y-1  rounded-3xl;
+    @apply bg-myblue text hover:bg-myblue2 z-50 px-6 h-[42px] flex items-center hover:-translate-y-1  rounded-3xl;
   }
   .btn2 {
-    @apply bg-myblue text duration-200 hover:bg-myblue2 h-[42px] flex items-center z-50 px-6 py-1  rounded-3xl
+    @apply bg-myblue text hover:bg-myblue2 h-[42px] flex items-center z-50 px-6 py-1  rounded-3xl
     hover:-translate-y-1;
   }
   .btn2-border {
-    @apply border-2 bg-transparent border-myblue h-[42px] flex items-center text duration-200 hover:-translate-y-1 hover:bg-myblue z-50 px-6 py-1  rounded-3xl;
+    @apply border-2 bg-transparent border-myblue h-[42px] flex items-center text hover:-translate-y-1 hover:bg-myblue z-50 px-6 py-1  rounded-3xl;
   }
 
   .hero {
@@ -108,6 +108,15 @@
   }
   .StakeCloudax__card {
     @apply p-5 md:px-[44px] rounded-[15.47px] md:py-[38px] text-white;
+  }
+  .Launchpad__card {
+    @apply p-6 glass rounded-2xl;
+  }
+  .Referral__item-group {
+    @apply grid grid-cols-1 mt-8 lg:mt-10 lg:grid-cols-2 lg:divide-x-2 divide-[rgba(255,255,255,0.3)];
+  }
+  .Referral__item {
+    @apply py-4 lg:py-8 lg:px-12;
   }
 }
 

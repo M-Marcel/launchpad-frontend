@@ -9,13 +9,15 @@ import { useMoralis } from "react-moralis";
 import useStaking from "./hooks/useStaking";
 import { toEther } from "./utils/web3";
 import { inThousands, calculateAPY } from "./utils/modifiers";
-import useGetCloudaxBalance from "./hooks/useGetCloudaxBalance";
+import useGetCloudaxBalance from "./hooks/useGetBEP20Balance";
 import useGetNativeBalance from "./hooks/useGetNativeBalance";
 
 function StakeCloudax() {
   const { checkpoints, updateCheckpoint } = useCheckpointsState();
   const [appOption, setAppOption] = React.useState("stake");
-  const cloudaxBalance = useGetCloudaxBalance();
+  const cloudaxBalance = useGetCloudaxBalance({
+    address: process.env.REACT_APP_CLOUDAX_STAKE_TOKEN_ADDRESS,
+  });
   const nativeBalance = useGetNativeBalance();
   const cloudrUsd = 1.5;
   const { user } = useMoralis();
@@ -24,7 +26,14 @@ function StakeCloudax() {
     userAddress: user?.get("ethAddress"),
     address: process.env.REACT_APP_STAKING_ADDRESS,
   };
-  const { stakingInfo, userStake, stake, unstake, loadStakingInfo, getUserStake } = useStaking(stakingOptions);
+  const {
+    stakingInfo,
+    userStake,
+    stake,
+    unstake,
+    loadStakingInfo,
+    getUserStake,
+  } = useStaking(stakingOptions);
   React.useEffect(() => {
     console.log(stakingInfo);
   }, [stakingInfo]);
@@ -35,9 +44,12 @@ function StakeCloudax() {
   return (
     <section className="relative">
       <section className="StakeCloudax__hero">
-        <h3 className="StakeCloudax__hero__one-liner">Stake Cloudax to Earn Rewards</h3>
+        <h3 className="StakeCloudax__hero__one-liner">
+          Stake Cloudax to Earn Rewards
+        </h3>
         <p className="StakeCloudax__hero__explainer">
-          Stake your $CLDX token and earn passive income with our high APY staking program without risk.
+          Stake your $CLDX token and earn passive income with our high APY
+          staking program without risk.
         </p>
         <div className="StakeCloudax__hero_ctas text-dark">
           <ConnectWallet />
@@ -51,8 +63,12 @@ function StakeCloudax() {
             </h3>
           </div>
           <div className="glass StakeCloudax__stat-card">
-            <h3 className="StakeCloudax__stat-cards__title">Number of Stakers</h3>
-            <h3 className="StakeCloudax__stat-cards__value">{inThousands(stakingInfo?.stakersCount || "0")}</h3>
+            <h3 className="StakeCloudax__stat-cards__title">
+              Number of Stakers
+            </h3>
+            <h3 className="StakeCloudax__stat-cards__value">
+              {inThousands(stakingInfo?.stakersCount || "0")}
+            </h3>
           </div>
           <div className="glass StakeCloudax__stat-card">
             <h3 className="StakeCloudax__stat-cards__title">APY</h3>
@@ -61,9 +77,18 @@ function StakeCloudax() {
             </h3>
           </div>
           <div className="glass StakeCloudax__stat-card">
-            <h3 className="StakeCloudax__stat-cards__title">Total Value Locked</h3>
+            <h3 className="StakeCloudax__stat-cards__title">
+              Total Value Locked
+            </h3>
             <h3 className="StakeCloudax__stat-cards__value">
-              ${stakingInfo ? inThousands((parseFloat(toEther(stakingInfo.totalStaked)) * cloudrUsd).toFixed(2)) : "0"}
+              $
+              {stakingInfo
+                ? inThousands(
+                    (
+                      parseFloat(toEther(stakingInfo.totalStaked)) * cloudrUsd
+                    ).toFixed(2)
+                  )
+                : "0"}
             </h3>
           </div>
         </section>
@@ -74,7 +99,9 @@ function StakeCloudax() {
             <button
               onClick={() => setAppOption("stake")}
               className={`text-white py-[12px] px-[18px] ${
-                appOption === "stake" ? "bg-myblue rounded-[4.3px]" : "bg-transparent opacity-50"
+                appOption === "stake"
+                  ? "bg-myblue rounded-[4.3px]"
+                  : "bg-transparent opacity-50"
               }`}
             >
               Stake
@@ -82,7 +109,9 @@ function StakeCloudax() {
             <button
               onClick={() => setAppOption("unstake")}
               className={`py-[12px] px-[18px] text-white ${
-                appOption === "unstake" ? "bg-myblue rounded-[4.3px]" : "bg-transparent opacity-50"
+                appOption === "unstake"
+                  ? "bg-myblue rounded-[4.3px]"
+                  : "bg-transparent opacity-50"
               }`}
             >
               Unstake
@@ -107,7 +136,10 @@ function StakeCloudax() {
             />
           )}
         </div>
-        <CheckpointsCard bnbBalance={inThousands(toEther(nativeBalance))} checkpoints={checkpoints} />
+        <CheckpointsCard
+          bnbBalance={inThousands(toEther(nativeBalance))}
+          checkpoints={checkpoints}
+        />
       </section>
     </section>
   );

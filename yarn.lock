@@ -10404,6 +10404,11 @@ react-scripts@5.0.1:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-use-copy-to-clipboard@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-use-copy-to-clipboard/-/react-use-copy-to-clipboard-1.0.1.tgz#39ef4b6b3af75463a6830956bdfcdab1b6446cd7"
+  integrity sha512-+HhdVdt6V0nGb1VSmlxt+/5B0tcgD5+2PrtYucSfVoNwUi3QfGSZlAZTFOSVJ+dpM/64v3iEOkvN5f1DYwkJ7Q==
+
 react@^16.13.1:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
