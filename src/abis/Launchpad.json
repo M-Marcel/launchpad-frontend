@@ -232,8 +232,7 @@
       "type": "address"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [{
@@ -254,8 +253,7 @@
       "type": "uint256"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -283,8 +281,7 @@
       "type": "uint256"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [{
@@ -306,8 +303,7 @@
       "type": "uint256"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -318,8 +314,7 @@
       "type": "address"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [{
@@ -340,8 +335,7 @@
       "type": "uint256"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -352,8 +346,7 @@
       "type": "address"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [],
@@ -415,8 +408,7 @@
       "type": "tuple[]"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [{
@@ -482,8 +474,7 @@
       "type": "tuple"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [{
@@ -582,8 +573,7 @@
       "type": "uint256"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [{
@@ -636,8 +626,7 @@
       "type": "tuple[]"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   },
   {
     "inputs": [{
@@ -751,7 +740,6 @@
       "type": "uint256"
     }],
     "stateMutability": "view",
-    "type": "function",
-    "constant": true
+    "type": "function"
   }
 ]
