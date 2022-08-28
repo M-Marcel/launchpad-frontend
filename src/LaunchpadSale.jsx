@@ -34,7 +34,10 @@ export default function LaunchpadSale({ sale }) {
           </div>
           {launchpadState.userVestingSchedule &&
             launchpadState.userVestingSchedule.length > 0 && (
-              <VestingSchedule launchpadHelpers={launchpadHelpers} />
+              <VestingSchedule
+                launchpadState={launchpadState}
+                launchpadHelpers={launchpadHelpers}
+              />
             )}
         </section>
       ) : (
