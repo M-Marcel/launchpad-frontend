@@ -178,7 +178,9 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
 
   const buyLaunchpadSale = async (amount) => {
     let referrerParam = searchParams.get("ref");
-    const referrer = ethereumAddress.isAddress(referrerParam) ? referrerParam : "0x0000000000000000000000000000000000000000";
+    const referrer = ethereumAddress.isAddress(referrerParam)
+      ? referrerParam
+      : "0x0000000000000000000000000000000000000000";
     const etherAmount = validateBuyData(amount);
     try {
       const transaction = await launchpad
@@ -207,7 +209,7 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
 
   const canClaimFromSchedule = async (scheduleId) => {
     const currentBlockTime = await launchpad.getCurrentTime();
-    const saleEndDate = launchpadSale.saleEndDate;
+    const saleEndDate = ethers.BigNumber.from(launchpadSale.saleEndDate);
     const schedule = userVestingSchedule[scheduleId];
     if (scheduleId === 0) {
       if (saleEndDate.gt(0) > 0 && currentBlockTime.gte(saleEndDate)) {
