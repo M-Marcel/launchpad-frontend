@@ -176,7 +176,8 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   };
 
   const buyLaunchpadSale = async (amount) => {
-    const referrer = searchParams.get("ref") || "0x0";
+    const referrer =
+      searchParams.get("ref") || "0x0000000000000000000000000000000000000000";
     const etherAmount = validateBuyData(amount);
     try {
       const transaction = await launchpad
