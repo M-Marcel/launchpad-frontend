@@ -65,7 +65,7 @@ function Home() {
           <button className="text-white btn2-border">How to Pay?</button>
         </div>
       </div>
-      <LaunchpadSale sale={0} />
+      <LaunchpadSale sale={1} />
     </div>
   );
 }

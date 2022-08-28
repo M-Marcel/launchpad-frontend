@@ -4,14 +4,14 @@ import { isSuccessfulTransaction } from "../utils/web3";
 import { solid } from "@fortawesome/fontawesome-svg-core/import.macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-function ClaimFromVesting({
-  canClaim,
-  scheduleId,
-  claimTokens,
-  reloadVesting,
-}) {
+function ClaimFromVesting({ scheduleId, launchpadHelpers }) {
   const [claimable, setClaimable] = React.useState(false);
   const [claiming, setClaiming] = React.useState(false);
+  const {
+    claimFromVestingSchedule: claimTokens,
+    canClaimFromSchedule: canClaim,
+    loadUserVestingSchedules: reloadVesting,
+  } = launchpadHelpers;
   const claimTokensFromVesting = async (scheduleId) => {
     try {
       setClaiming(true);
