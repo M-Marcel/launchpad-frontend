@@ -1,9 +1,21 @@
 import React from "react";
 import { useMoralis } from "react-moralis";
+import { useCopyToClipboard } from "react-use-copy-to-clipboard";
 
 function ReferralLink() {
   const [referralLink, setReferralLink] = React.useState("");
+  const [buttonText, setButtonText] = React.useState("Copy Link");
   const { user } = useMoralis();
+  const clickRef = useCopyToClipboard(
+    referralLink,
+    () => {
+      setButtonText("Copied!");
+      setTimeout(() => {
+        setButtonText("Copy Link");
+      }, 2000);
+    },
+    () => console.log("Unable to copy!")
+  );
   React.useEffect(() => {
     if (user) {
       setReferralLink(`${window.location.host}/?ref=${user.get("ethAddress")}`);
@@ -21,8 +33,11 @@ function ReferralLink() {
         aria-label="Referral Link"
         value={referralLink}
       />
-      <button className="justify-center btn text-dark max-w-[150px] mx-auto">
-        Copy Link
+      <button
+        ref={clickRef}
+        className="justify-center btn text-dark max-w-[150px] mx-auto"
+      >
+        {buttonText}
       </button>
     </div>
   );

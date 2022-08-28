@@ -2,7 +2,7 @@ import React from "react";
 import ReferralEarnings from "./ReferralEarnings";
 import ReferralLink from "./ReferralLink";
 
-function ReferralSystem() {
+function ReferralSystem({ launchpadState, launchpadHelpers}) {
   const tokenTicker = process.env.REACT_APP_TOKEN_TICKER;
   return (
     <section className="Launchpad__card lg:col-span-2">
@@ -11,7 +11,10 @@ function ReferralSystem() {
       </h3>
       <div className="Referral__item-group">
         <ReferralLink />
-        <ReferralEarnings />
+        <ReferralEarnings
+          launchpadState={launchpadState}
+          launchpadHelpers={launchpadHelpers}
+        />
       </div>
     </section>
   );

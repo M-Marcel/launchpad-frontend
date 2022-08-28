@@ -3,6 +3,7 @@ import { useMoralis } from "react-moralis";
 import IBEP20 from "../abis/IBEP20.json";
 import useDataFromContractFunction from "./useDataFromContractFunction";
 import { ethers, isSuccessfulTransaction, toEther } from "../utils/web3";
+import { useSearchParams } from "react-router-dom";
 
 const busdAddress = process.env.REACT_APP_BUSD_ADDRESS || null;
 
@@ -10,7 +11,10 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   const [launchpad, setLaunchpad] = useState(null);
   const [launchpadSale, setLaunchpadSale] = useState(null);
   const [userVestingSchedule, setUserVestingSchedule] = useState(null);
+  const [userReferralEarning, setUserReferralEarning] = useState(null);
+  const [canClaimReferralEarning, setCanClaimReferralEarning] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
+  const [searchParams] = useSearchParams();
   const { web3, isInitialized } = useMoralis();
   const { load, data: launchpadData } = useDataFromContractFunction();
   const checkpoints = {
@@ -46,6 +50,11 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     });
   }
 
+  async function loadUserReferralEarnings() {
+    const earnings = await launchpad.getReferralEarnings(sale, userAddress);
+    setUserReferralEarning(toEther(earnings));
+  }
+
   async function loadUserVestingSchedules() {
     const schedules = await launchpad.getUserVestingScheduleBySale(
       sale,
@@ -53,6 +62,15 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     );
     setUserVestingSchedule(schedules);
   }
+
+  const loadCanClaimReferralEarning = async () => {
+    const saleEndDate = ethers.BigNumber.from(launchpadSale.saleEndDate);
+    const currentBlockTime = await launchpad.getCurrentTime();
+    const earnings = parseFloat(userReferralEarning || "0");
+    const canClaim =
+      earnings > 0 && saleEndDate.gt(0) && currentBlockTime.gte(saleEndDate);
+    setCanClaimReferralEarning(canClaim);
+  };
 
   useEffect(() => {
     if (isInitialized) {
@@ -71,6 +89,8 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
         sold,
         hasWhitelist,
         hasAllocation,
+        saleAllocated,
+        saleEndDate,
       ] = launchpadData[sale];
       setLaunchpadSale({
         saleRate,
@@ -81,6 +101,8 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
         sold,
         hasWhitelist,
         hasAllocation,
+        saleAllocated,
+        saleEndDate,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -89,10 +111,14 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
     if (userAddress) {
       if (launchpad) {
         loadUserVestingSchedules();
+        loadUserReferralEarnings();
+        if (launchpadSale) {
+          loadCanClaimReferralEarning();
+        }
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userAddress, launchpad]);
+  }, [userAddress, launchpad, launchpadSale]);
 
   const checkApprovedAmount = async () => {
     if (paymentMethod) {
@@ -149,11 +175,12 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   };
 
   const buyLaunchpadSale = async (amount) => {
+    const referrer = searchParams.get("ref") || "0x0";
     const etherAmount = validateBuyData(amount);
     try {
       const transaction = await launchpad
         .connect(web3.getSigner())
-        .buyLaunchpadSale(sale, etherAmount);
+        .buyLaunchpadSale(sale, etherAmount, referrer);
       return transaction;
     } catch (e) {
       handleError(e);
@@ -177,11 +204,28 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
 
   const canClaimFromSchedule = async (scheduleId) => {
     const currentBlockTime = await launchpad.getCurrentTime();
+    const saleEndDate = launchpadSale.saleEndDate;
     const schedule = userVestingSchedule[scheduleId];
+    if (scheduleId === 0) {
+      if (saleEndDate.gt(0) > 0 && currentBlockTime.gte(saleEndDate)) {
+        return true && schedule.totalAmount.gt(schedule.releasedAmount);
+      }
+    }
     return (
       currentBlockTime.gte(schedule.startTime.add(schedule.duration)) &&
       schedule.totalAmount.gt(schedule.releasedAmount)
     );
+  };
+
+  const claimReferralEarning = async () => {
+    try {
+      const transaction = await launchpad
+        .connect(web3.getSigner())
+        .claimReferralEarnings(sale);
+      return transaction;
+    } catch (err) {
+      handleError(err);
+    }
   };
   return {
     helpers: {
@@ -193,6 +237,7 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       core: launchpad,
       loadLaunchpad,
       loadUserVestingSchedules,
+      claimReferralEarning,
     },
     state: {
       launchpadSale,
@@ -200,6 +245,8 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
       paymentMethod,
       saleId: sale,
       userAddress,
+      userReferralEarning,
+      canClaimReferralEarning,
     },
   };
 }

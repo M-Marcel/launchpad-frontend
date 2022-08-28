@@ -27,7 +27,10 @@ export default function LaunchpadSale({ sale }) {
               launchpadHelpers={launchpadHelpers}
             />
             <PresaleInfo launchpadState={launchpadState} />
-            <ReferralSystem />
+            <ReferralSystem
+              launchpadState={launchpadState}
+              launchpadHelpers={launchpadHelpers}
+            />
           </div>
           {launchpadState.userVestingSchedule &&
             launchpadState.userVestingSchedule.length > 0 && (
