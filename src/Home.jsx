@@ -1,5 +1,5 @@
 import ConnectWallet from "./auth/ConnectWallet";
-import { explore, twitter, discord, medium, coin } from "./img";
+import { explore, twitter, discord, medium, coin, logo } from "./img";
 import LaunchpadSale from "./LaunchpadSale";
 
 function Home() {
@@ -14,7 +14,7 @@ function Home() {
         </div>
         <div className="ido">
           <img
-            src={coin}
+            src={logo}
             className="z-50 w-16 h-16 lg:w-auto lg:h-32"
             alt="Coin"
           />

@@ -11,7 +11,7 @@ export default function Footer(){
             <footer className=' footer-bg relative z-50 mt-20 lg:mt-32 xl:mt-80 padding w-full flex items-center justify-between  h-[100px]'>
         <div className='flex justify-between'>
           <p className=' text-[8px] lg:text-base'>
-            Cloudr (c) 2022. All Rights Reserved.
+            Cloudax (c) 2022. All Rights Reserved.
           </p>
         </div>
         <div className='flex w-[80px] lg:w-[150px] justify-between'>

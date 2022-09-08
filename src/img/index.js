@@ -11,7 +11,7 @@ import coinRight from "./coin-right.png";
 import color1 from "./eclipse-top-left.svg";
 import color2 from "./eclipse-top-right.svg";
 import coin from "./coin.png";
-import logo from "./logo.svg";
+import logo from "./logo2.svg";
 
 export {
   twitterFooter,
