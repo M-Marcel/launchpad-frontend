@@ -15,13 +15,13 @@ export default function Footer(){
           </p>
         </div>
         <div className='flex w-[80px] lg:w-[150px] justify-between'>
-          <a href='https://' className='duration-200 hover:scale-150'>
+          <a href='https://twitter.com/cloudaxHQ' className='duration-200 hover:scale-150'>
             <img className='h-4 w-4' src={twitterFooter} alt='Twitter' />
           </a>
-          <a href='https://' className='duration-200 hover:scale-150'>
+          <a href='https://t.me/cloudaxOfficial' className='duration-200 hover:scale-150'>
             <img className='h-4 w-4' src={telegramFooter} alt='Twitter' />
           </a>
-          <a href='https://' className='duration-200 hover:scale-150'>
+          <a href='http://cloudax.medium.com/' className='duration-200 hover:scale-150'>
             <img className='h-4 w-4' src={mediumFooter} alt='Twitter' />
           </a>
         </div>

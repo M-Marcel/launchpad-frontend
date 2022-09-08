@@ -11,11 +11,9 @@ function Nav() {
   return (
     <div>
       <nav className="flex items-center justify-between pt-8 padding lg:pt-20">
-        <Link to="/" className="z-50 flex logo">
-          <img src={logo} alt="cloudax logo" />
-          <h2 className="hidden ml-3 text-2xl font-bold font-monument md:block">
-            Cloudax
-          </h2>
+        <Link to="/" className="z-50 flex ">
+          <img src={logo} alt="cloudax logo " />
+          <h2 className=" ml-1 text-[18px] font-bold font-monument">Cloudax</h2>
         </Link>
         <div className="flex">
           {showSwitch && (
