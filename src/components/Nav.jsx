@@ -12,8 +12,11 @@ function Nav() {
     <div>
       <nav className="flex items-center justify-between pt-8 padding lg:pt-20">
         <Link to="/" className="z-50 flex ">
-          <img src={logo} alt="cloudax logo " />
-          <h2 className=" ml-1 text-[18px] font-bold font-monument">Cloudax</h2>
+          <img
+            src={require("../img/cloudax-new-logo.png")}
+            alt="cloudax logo"
+          />
+          {/* <h2 className=" ml-1 text-[18px] font-bold font-monument">Cloudax</h2> */}
         </Link>
         <div className="flex">
           {showSwitch && (

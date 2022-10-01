@@ -10,6 +10,7 @@ module.exports = {
       fontFamily: {
         dmsans: ["DM Sans", "sans-serif"],
         monument: ["Monument Extended", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
       },
     },
   },

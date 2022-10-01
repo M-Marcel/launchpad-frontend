@@ -51,10 +51,10 @@ function Stake({
   };
   return (
     <div>
-      <h3 className="font-monument text-lg lg:text-[25.29px] lg:leading-[30.35px]">
+      <h3 className="font-extrabold text-lg lg:text-[32px] lg:leading-[30.35px]">
         Stake your $CLDX
       </h3>
-      <h4 className="text-xs lg:text-sm mb-[29px]">
+      <h4 className="text-xs lg:text-[18px] mb-[29px] mt-2">
         Enter the amount of $CLDX you want to stake
       </h4>
       <div>
@@ -65,10 +65,10 @@ function Stake({
           onChange={handleInputChange}
           aria-label="stake amount"
           type="number"
-          className="bg-[#04080F] py-[21px] w-full rounded-[7px] px-[28px] font-monument"
+          className="bg-[#04080F] py-[21px] w-full rounded-[7px] px-[28px] text-[18px]"
         />
-        <div className="mt-[13px] flex flex-col gap-2 justify-between">
-          <span className="text-xs">
+        <div className="mt-[13px] flex flex-col gap-2 justify-between text-[18px]">
+          <span className="">
             Balance:{" "}
             {inThousands(
               Number(parseFloat(toEther(cloudaxBalance || "0"))).toFixed(2)
@@ -77,7 +77,7 @@ function Stake({
           </span>
           <button
             onClick={async () => await stakeToken()}
-            className="bg-myblue py-[12px] w-auto ml-auto rounded-[7px] px-[44px] text-[#0B0819] text-sm lg:text-base"
+            className="bg-myblue py-[12px] w-auto ml-auto rounded-[7px] px-[44px] text-[#0B0819] text-sm lg:text-[18px]"
           >
             {staking && (
               <FontAwesomeIcon icon={solid("spinner")} spin className="mr-2" />
