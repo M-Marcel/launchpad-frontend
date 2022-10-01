@@ -42,7 +42,7 @@ function StakeCloudax() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appOption]);
   return (
-    <section className="relative">
+    <section className="relative font-roboto">
       <section className="StakeCloudax__hero">
         <h3 className="StakeCloudax__hero__one-liner">
           Stake Cloudax to Earn Rewards
@@ -53,7 +53,14 @@ function StakeCloudax() {
         </p>
         <div className="StakeCloudax__hero_ctas text-dark">
           <ConnectWallet />
-          <button className="px-5 btn text-dark">Staking Guide</button>
+          <button className="px-5 text-white btn2-border">
+            <a
+              href="https://cloudax.medium.com/cloudax-staking-guide-earn-high-passive-income-with-no-risk-2f9e1706a7b"
+              target="_"
+            >
+              Staking Guide
+            </a>
+          </button>
         </div>
         <section className="StakeCloudax__stat-cards">
           <div className="glass StakeCloudax__stat-card">
@@ -95,7 +102,7 @@ function StakeCloudax() {
       </section>
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-[21px] wrapper">
         <div className="self-start glass StakeCloudax__card ">
-          <div className="bg-[#04080F] rounded-[5.92px] max-w-[196px] p-[9px] mb-[29.17px]">
+          <div className="bg-[#04080F] rounded-[5.92px] max-w-[206px] p-[9px] mb-[29.17px] text-[18px]">
             <button
               onClick={() => setAppOption("stake")}
               className={`text-white py-[12px] px-[18px] ${
