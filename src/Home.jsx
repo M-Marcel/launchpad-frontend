@@ -1,11 +1,12 @@
 import ConnectWallet from "./auth/ConnectWallet";
 import { explore, twitter, medium, telegramFooter } from "./img";
 import LaunchpadSale from "./LaunchpadSale";
+import App from "./App";
 
 function Home() {
   return (
-    <div>
-      <div className="hero">
+    <App>
+      <div className=" text-white">
         <div className="flex justify-between btn-set-1">
           {/* <button className="text-black glow text btn">Upcoming</button> */}
           <div className="mx-auto text-blue-300 text btn2-border hover:bg-transparent hover:translate-y-0">
@@ -13,61 +14,29 @@ function Home() {
           </div>
         </div>
         <div className="ido">
-          <img
-            src={require("./img/CLOUDAX-img.png")}
-            className="z-50 w-16 h-16 lg:w-auto lg:h-32"
-            alt="Coin"
-          />
+          <img src={require("./img/CLOUDAX-img.png")} className="z-50 w-16 h-16 lg:w-auto lg:h-32" alt="Coin" />
           <div className="z-50 ml-[48px]">
             <p className="font-bold header font-roboto">Cloudax Token IDO</p>
             <div className="socials">
-              <a
-                href="https://cloudax.io"
-                target="_"
-                className="duration-200 hover:scale-150"
-              >
-                <img
-                  src={explore}
-                  className="w-6 h-6 lg:w-auto lg:h-auto"
-                  alt="bg-color"
-                />
+
+              <a href="https://cloudax.io" target="_" className="duration-200 hover:scale-150">
+                <img src={explore} className="w-6 h-6 lg:w-auto lg:h-auto" alt="bg-color" />
               </a>
-              <a
-                href=" https://twitter.com/cloudaxHQ"
-                target="_"
-                className="duration-200 hover:scale-150"
-              >
-                <img
-                  src={twitter}
-                  className="w-6 h-6 lg:w-auto lg:h-auto"
-                  alt="bg-color"
-                />
+
+              <a href=" https://twitter.com/cloudaxHQ" target="_" className="duration-200 hover:scale-150">
+                <img src={twitter} className="w-6 h-6 lg:w-auto lg:h-auto" alt="bg-color" />
               </a>
-              <a
-                href="https://t.me/cloudaxofficial"
-                className="duration-200 hover:scale-150 flex justify-center items-center bg-[#252a31] rounded-[50%] lg:w-14 lg:h-14"
-              >
-                <img
-                  src={telegramFooter}
-                  className="w-6 h-6 lg:w-[32px] lg:h-auto"
-                  alt="bg-color"
-                />
+              <a href="https://t.me/cloudaxofficial" className="duration-200 hover:scale-150 flex justify-center items-center bg-[#252a31] rounded-[50%] lg:w-14 lg:h-14" >
+                <img src={telegramFooter} className="w-6 h-6 lg:w-[32px] lg:h-auto" alt="bg-color" />
               </a>
-              <a
-                href="https://cloudax.medium.com/"
-                className="duration-200 hover:scale-150"
-              >
-                <img
-                  src={medium}
-                  className="w-6 h-6 lg:w-auto lg:h-auto"
-                  alt="bg-color"
-                />
+              <a href="https://cloudax.medium.com/" className="duration-200 hover:scale-150" >
+                <img src={medium} className="w-6 h-6 lg:w-auto lg:h-auto" alt="bg-color" />
               </a>
             </div>
           </div>
         </div>
 
-        <p className="relative z-50 px-8 text lg:text-center leading-6 lg:leading-8  lg:px-0 margin font-roboto lg:max-w-[65%] mx-auto">
+        <p className=" px-8 text lg:text-center leading-6 lg:leading-8  lg:px-0 margin font-roboto lg:max-w-[65%] mx-auto">
           $CLDX is the native and utility token designed to power the
           ever-expanding and innovative cloudax ecosystem. Built to last with a
           hyper deflatinary mechanism which include qauterly buybacks/burn and
@@ -86,7 +55,7 @@ function Home() {
         </div>
       </div>
       <LaunchpadSale sale={1} />
-    </div>
+    </App>
   );
 }
 
