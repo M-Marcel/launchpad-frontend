@@ -15,8 +15,8 @@ function Home() {
             </div>
           </div>
           <div className="ido">
-            <img src={require("./img/CLOUDAX-img.png")} className="z-50 w-16 h-16 lg:w-auto lg:h-32" alt="Coin" />
-            <div className="z-50 ml-[48px]">
+            <img src={require("./images/Cloudax Logo icon white transparent 1.png")} className="z-50 w-[5rem] lg:w-[12rem]" alt="Coin" />
+            <div className="z-50 ml-[25px] lg:ml-[48px]">
               <p className="font-bold header font-roboto">Cloudax Token IDO</p>
               <div className="socials">
 
