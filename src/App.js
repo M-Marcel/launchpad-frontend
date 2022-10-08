@@ -22,7 +22,7 @@ function App({ children }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isInitialized, isAuthenticated]);
   return (
-    <section className=''>
+    <section className='bg-black text-white'>
       <nav className={`'bg-[#16162d4f] h-16 md:h-18 w-full text-white`}>
         <a href="https://www.cloudax.io/" className="flex justify-between w-11/12  mx-auto h-full items-center">
           <img className=' w-[6rem] ' src={logo} alt='logo' />
