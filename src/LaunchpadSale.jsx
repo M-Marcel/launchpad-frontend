@@ -17,32 +17,35 @@ export default function LaunchpadSale({ sale }) {
 
   const { helpers: launchpadHelpers, state: launchpadState } =
     useLaunchpad(launchpadOptions);
+  console.log("launchpadState", launchpadState)
+  console.log("launchpadState.launchpadSale", launchpadState.launchpadSale)
   return (
     <section>
-      {launchpadState.launchpadSale ? (
-        <section className="z-50 padding margin2">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <PresaleCard
-              launchpadState={launchpadState}
-              launchpadHelpers={launchpadHelpers}
-            />
-            <PresaleInfo launchpadState={launchpadState} />
-            <ReferralSystem
-              launchpadState={launchpadState}
-              launchpadHelpers={launchpadHelpers}
-            />
-          </div>
-          {launchpadState.userVestingSchedule &&
-            launchpadState.userVestingSchedule.length > 0 && (
-              <VestingSchedule
-                launchpadState={launchpadState}
-                launchpadHelpers={launchpadHelpers}
-              />
-            )}
-        </section>
-      ) : (
-        ""
-      )}
+      {
+        launchpadState.launchpadSale ?
+          (
+            <section className="z-50 padding margin2">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <PresaleCard
+                  launchpadState={launchpadState}
+                  launchpadHelpers={launchpadHelpers}
+                />
+                <PresaleInfo launchpadState={launchpadState} />
+                {/* <ReferralSystem
+                  launchpadState={launchpadState}
+                  launchpadHelpers={launchpadHelpers}
+                /> */}
+              </div>
+              {launchpadState.userVestingSchedule &&
+                launchpadState.userVestingSchedule.length > 0 && (
+                  <VestingSchedule
+                    launchpadState={launchpadState}
+                    launchpadHelpers={launchpadHelpers}
+                  />
+                )}
+            </section>
+          )
+          : ("")}
     </section>
   );
 }

@@ -53,8 +53,8 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   }
 
   async function loadUserReferralEarnings() {
-    const earnings = await launchpad.getReferralEarnings(sale, userAddress);
-    setUserReferralEarning(toEther(earnings));
+    // const earnings = await launchpad.getReferralEarnings(sale, userAddress);
+    // setUserReferralEarning(toEther(earnings));
   }
 
   async function loadUserVestingSchedules() {

@@ -8,6 +8,9 @@ export default function VestingSchedule({ launchpadState, launchpadHelpers }) {
   const totalVested = vestingSchedule
     .map((sch) => toEther(sch.totalAmount))
     .reduce((a, b) => parseFloat(a) + parseFloat(b));
+    // console.log("totalVested", vestingSchedule)
+    
+    // .map((sch) => toEther(sch.totalAmount))
 
   return (
     <div className="flex justify-between p-12 overflow-auto glass margin rounded-2xl">

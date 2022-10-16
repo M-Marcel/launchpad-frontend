@@ -20,7 +20,6 @@ root.render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/staking" element={<StakeCloudax />} />
-          {/* <Route path="/vesting" element={<VestingSchedule />} /> */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>

@@ -36,7 +36,8 @@ function ReferralEarnings({ launchpadState, launchpadHelpers }) {
         Your Referral Earnings
       </h3>
       <h3 className="mb-3 text-xl font-bold text-center break-words font-monument lg:text-2xl text-slate-200">
-        {inThousands(userReferralEarning || "0")} {tokenTicker}
+        {inThousands("0")} {tokenTicker}
+        {/* {inThousands(userReferralEarning || "0")} {tokenTicker} */}
       </h3>
       <button
         onClick={async () => await claim()}
