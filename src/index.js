@@ -6,6 +6,7 @@ import { MoralisProvider } from "react-moralis";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Home";
 import StakeCloudax from "./StakeCloudax";
+// import VestingSchedule from "./VestingSchedule";
 import ErrorPage from "./components/ErrorPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -19,6 +20,7 @@ root.render(
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/staking" element={<StakeCloudax />} />
+          {/* <Route path="/vesting" element={<VestingSchedule />} /> */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
       </BrowserRouter>
