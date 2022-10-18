@@ -33,12 +33,14 @@ function PresaleCard({ launchpadState, launchpadHelpers }) {
           {inThousands(toEther(launchpadSale?.saleCap || "0"))} BUSD
         </p>
       </div>
-      {!userVestingSchedule?.length > 0 && (
-        <BuyPresale
-          launchpadState={launchpadState}
-          launchpadHelpers={launchpadHelpers}
-        />
-      )}
+      {
+        // !userVestingSchedule?.length > 0 && 
+        (
+          <BuyPresale
+            launchpadState={launchpadState}
+            launchpadHelpers={launchpadHelpers}
+          />
+        )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { toEther } from "../utils/web3";
 
 function PresaleInfo({ launchpadState: { launchpadSale: presale, saleId } }) {
-  const accessTypes = ["Private", "Public"];
+  const accessTypes = ["Angel", "Private", "Public"];
   const tokenTicker = process.env.REACT_APP_TOKEN_TICKER;
   return (
     <div className="flex justify-between Launchpad__card xl:items-center">

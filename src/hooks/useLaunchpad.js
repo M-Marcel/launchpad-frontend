@@ -3,8 +3,8 @@ import { useMoralis } from "react-moralis";
 import IBEP20 from "../abis/IBEP20.json";
 import useDataFromContractFunction from "./useDataFromContractFunction";
 import { ethers, isSuccessfulTransaction, toEther } from "../utils/web3";
-import { useSearchParams } from "react-router-dom";
-import ethereumAddress from "ethereum-address";
+// import { useSearchParams } from "react-router-dom";
+// import ethereumAddress from "ethereum-address";
 
 const busdAddress = process.env.REACT_APP_BUSD_ADDRESS || null;
 
@@ -15,7 +15,7 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   const [userReferralEarning, setUserReferralEarning] = useState(null);
   const [canClaimReferralEarning, setCanClaimReferralEarning] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState(null);
-  const [searchParams] = useSearchParams();
+  // const [searchParams] = useSearchParams();
   const { web3, isInitialized } = useMoralis();
   const { load, data: launchpadData } = useDataFromContractFunction();
   const checkpoints = {
@@ -177,17 +177,21 @@ export default function useLaunchpad({ address, ABI, userAddress, sale }) {
   };
 
   const buyLaunchpadSale = async (amount) => {
-    let referrerParam = searchParams.get("ref");
-    const referrer = ethereumAddress.isAddress(referrerParam)
-      ? referrerParam
-      : "0x0000000000000000000000000000000000000000";
+    // let referrerParam = searchParams.get("ref");
+    // const referrer = ethereumAddress.isAddress(referrerParam)
+    //   ? referrerParam
+    //   : "0x0000000000000000000000000000000000000000";
     const etherAmount = validateBuyData(amount);
     try {
+      console.log("before transaction")
       const transaction = await launchpad
         .connect(web3.getSigner())
-        .buyLaunchpadSale(sale, etherAmount, referrer);
+        .buyLaunchpadSale(sale, etherAmount);
+      // .buyLaunchpadSale(sale, etherAmount, referrer);
+      console.log("after transaction")
       return transaction;
     } catch (e) {
+      console.log(e)
       handleError(e);
     }
   };

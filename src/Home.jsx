@@ -55,7 +55,7 @@ function Home() {
             </button>
           </div>
         </div>
-        <LaunchpadSale sale={1} />
+        <LaunchpadSale sale={2} />
       </div>
     </App>
   );
